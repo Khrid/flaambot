@@ -33,11 +33,13 @@ client.on('ready', () => {
 					key = Math.floor(Math.random() * files.length)
 					target = files[key]
 					fs.rename('./images/available/'+target, './images/today.jpg'), function (success) {
-						if(success) {
-							tools.sendToLogChannel(":smirk_cat: today.jpg updated :smirk_cat:")
-						} else {
-							tools.sendToLogChannel(":scream_cat: Could not create today.jpg :scream_cat:")
-						}
+						fs.stat('./images/today.jpg', function(err, stat) {
+							if(err == null) {
+								tools.sendToLogChannel(":smirk_cat: today.jpg updated :smirk_cat:")
+							} else {
+								tools.sendToLogChannel(":scream_cat: Could not create today.jpg :scream_cat:")
+							}
+						})
 					}
 				} else {
 					tools.sendToLogChannel(":scream_cat: No more pics :scream_cat:");
