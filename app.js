@@ -17,7 +17,7 @@ client.on('ready', () => {
     // rule.second =30;
 
     var j = schedule.scheduleJob(rule, function() {
-        client.channels.get("349976478538268674").send("Testing");
+        client.channels.get(CHAN_ID_DKC_GENERAL).send("Testing");
         /*
 		 * client.channels.get("330420560972742656").send({ "embed": { title:
 		 * 'Photo de Flaam du jour <3', image: { "url" :
