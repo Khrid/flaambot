@@ -2,8 +2,6 @@
  * http://usejsdoc.org/
  */
 module.exports = {
-		
-client,
 
 scanDir: function (dir) {
 	const fs = require('fs')
@@ -19,7 +17,9 @@ scanDir: function (dir) {
 },
 
 sendToLogChannel: function (message) {
-    client.lient.channels.get(CHAN_ID_DKC_FLAAMLOGS).send(message);
-}
+	module.exports.client.channels.get(CHAN_ID_DKC_FLAAMLOGS).send(message);
+},
+
+client = null
 
 }
