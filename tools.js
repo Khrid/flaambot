@@ -6,8 +6,6 @@ function scanDir(dir) {
 	var f = [];
 	fs.readdir(dir, (err, files) => {
 		f = files 
-		console.log(err)
-		console.log(files)
 	})
 	return f
 }
