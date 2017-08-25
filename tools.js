@@ -3,6 +3,7 @@
  */
 function scanDir(dir, callback) {
 	const fs = require('fs')
+	var f = []
 	fs.readdir(dir, (err, files) => {
 		if (err) {
 	        throw err;
@@ -10,14 +11,14 @@ function scanDir(dir, callback) {
 
 		if(files.length > 0) {
 			files.for(file => {
-				console.log(file)
+				f.push(file)
 			})
 		} else {
 			console.log("empty")
 		}
 	})
-	console.log(files)
-	callback(files)
+	console.log(f)
+	callback(f)
 }
 
 function sendToLogChannel(message) {
