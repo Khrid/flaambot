@@ -10,7 +10,7 @@ const CHAN_ID_QGS_FLAAMCHAN = "330420560972742656";
 // Create an instance of a Discord client
 const client = new Discord.Client();
 
-client.on('ready', () => {
+client.on('ready', () => { 
 	var revision = require('child_process')
 	  .execSync('git rev-parse HEAD')
 	  .toString().trim();
