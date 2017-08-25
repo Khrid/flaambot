@@ -17,7 +17,7 @@ function scanDir(dir, callback) {
 			console.log("empty")
 		}
 
-		return callback(null, f)
+		callback(null, f)
 	})
 }
 
