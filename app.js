@@ -2,8 +2,8 @@
 const Discord = require('discord.js');
 var schedule = require('node-schedule');
 
-const CHAN_ID_DKC_GENERAL = "349976478538268674";
-const CHAN_ID_QGS_FLAAMCHAN = "330420560972742656";
+var CHAN_ID_DKC_GENERAL = "349976478538268674";
+var CHAN_ID_QGS_FLAAMCHAN = "330420560972742656";
 
 // Create an instance of a Discord client
 const client = new Discord.Client();
