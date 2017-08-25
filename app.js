@@ -33,7 +33,7 @@ var rule = new schedule.RecurrenceRule();
                 }
         });
         console.log('Pics sent to channel !');*/
-    })
+    });
     client.channels.get("349976478538268674").send("Flaambot ready \:heart_eyes_cat: !");
 });
 
