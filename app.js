@@ -2,14 +2,14 @@
 const Discord = require('discord.js');
 var schedule = require('node-schedule');
 
-var CHAN_ID_DKC_GENERAL = "349976478538268674";
-var CHAN_ID_QGS_FLAAMCHAN = "330420560972742656";
+const CHAN_ID_DKC_GENERAL = "349976478538268674";
+const CHAN_ID_QGS_FLAAMCHAN = "330420560972742656";
 
 // Create an instance of a Discord client
 const client = new Discord.Client();
 
 client.on('ready', () => {
-    client.channels.get("349976478538268674").send("Flaambot ready \:heart_eyes_cat: !");
+    client.channels.get(CHAN_ID_DKC_GENERAL).send("Flaambot ready \:heart_eyes_cat: !");
 
     var rule = new schedule.RecurrenceRule();
     rule.minute = 0;
@@ -17,7 +17,7 @@ client.on('ready', () => {
     // rule.second =30;
 
     var j = schedule.scheduleJob(rule, function() {
-        client.channels.get("349976478538268674").send("Testing");
+        client.channels.get(CHAN_ID_DKC_GENERAL).send("Testing");
         /*
 		 * client.channels.get("330420560972742656").send({ "embed": { title:
 		 * 'Photo de Flaam du jour <3', image: { "url" :
