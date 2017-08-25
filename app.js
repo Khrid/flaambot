@@ -28,20 +28,21 @@ client.on('ready', () => {
 		if(err == null) {
 			tools.sendToLogChannel(":smirk_cat: today.jpg exists :smirk_cat:")
 		} else {
-			files = tools.scanDir('./images/available')
-			if(files.length > 0) {
-				key = Math.floor(Math.random() * files.length)
-				target = files[key]
-				fs.rename('./images/available/'+target, './images/today.jpg'), function (success) {
-					if(success) {
-						tools.sendToLogChannel(":smirk_cat: today.jpg updated :smirk_cat:")
-					} else {
-						tools.sendToLogChannel(":scream_cat: Could not create today.jpg :scream_cat:")
+			fs.readdir(dir, function (err, files) { 
+				if(files.length > 0) {
+					key = Math.floor(Math.random() * files.length)
+					target = files[key]
+					fs.rename('./images/available/'+target, './images/today.jpg'), function (success) {
+						if(success) {
+							tools.sendToLogChannel(":smirk_cat: today.jpg updated :smirk_cat:")
+						} else {
+							tools.sendToLogChannel(":scream_cat: Could not create today.jpg :scream_cat:")
+						}
 					}
+				} else {
+					tools.sendToLogChannel(":scream_cat: No more pics :scream_cat:");
 				}
-			} else {
-				tools.sendToLogChannel(":scream_cat: No more pics :scream_cat:");
-			}
+			})
 		}
 	});
 	
