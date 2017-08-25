@@ -14,11 +14,13 @@ client.on('ready', () => {
 	var revision = require('child_process')
 	  .execSync('git rev-parse HEAD')
 	  .toString().trim();
-	
-	client.channels.get(CHAN_ID_DKC_FLAAMLOGS).send(":smirk_cat: Flaambot starting :smirk_cat:");
-    client.channels.get(CHAN_ID_DKC_FLAAMLOGS).send("revision " + revision);
-    client.channels.get(CHAN_ID_DKC_FLAAMLOGS).send("ready \:heart_eyes_cat:");
 
+	sendToLogChannel(":smirk_cat: Flaambot starting :smirk_cat:")
+	sendToLogChannel("**revision : **" + revision)
+	sendToLogChannel("ready \:heart_eyes_cat:")
+
+	scanDir('./images/available');
+	
     var rule = new schedule.RecurrenceRule();
     rule.minute = 0;
     rule.hour = 6;
@@ -50,3 +52,20 @@ client.on('message', message => {
 
 // Log our bot in
 client.login(process.env.FLAAMBOT_DISCORD_TOKEN);
+
+function scanDir(dir) {
+	const fs = require('fs')
+	fs.readdir(dir, (err, files) => {
+		if(files.length > 0) {
+			files.foreach(file => {
+				sendToLogChannel(file)
+			})
+		} else {
+			sendToLogChannel("Plus de photos de Flaam");
+		}
+	})
+}
+
+function sentToLogChannel(message) {
+    client.channels.get(CHAN_ID_DKC_FLAAMLOGS).send(message);
+}
