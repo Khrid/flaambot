@@ -21,7 +21,7 @@ client.on('ready', () => {
 	tools.sendToLogChannel("**revision : **" + revision)
 	tools.sendToLogChannel("ready \:heart_eyes_cat:")
 
-	tool.scanDir('./images/available');
+	tools.scanDir('./images/available');
 	
     var rule = new schedule.RecurrenceRule();
     rule.minute = 0;
