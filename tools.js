@@ -7,6 +7,7 @@ function scanDir(dir) {
 	fs.readdir(dir, (err, files) => {
 		f = files 
 	})
+	console.log(f)
 	return f
 }
 
