@@ -26,6 +26,6 @@
     "supertest": "^3.0.0",
     "discord": "*",
     "node-schedule": "*",
-    "moment": "^2.18.1"
+    "moment": "=>2.0.0"
   }
 }

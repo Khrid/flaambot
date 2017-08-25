@@ -2,6 +2,7 @@
 const Discord = require('discord.js');
 const fs = require('fs')
 var schedule = require('node-schedule');
+
 var tools = require('./tools')
 
 const CHAN_ID_DKC_GENERAL = "349976478538268674";
