@@ -6,8 +6,8 @@ function scanDir(dir) {
 	var f = [];
 	fs.readdir(dir, (err, files) => {
 		f = files 
-		module.exports.tools.sendToLogChannel(err)
-		module.exports.tools.sendToLogChannel(files)
+		module.exports.sendToLogChannel(err)
+		module.exports.sendToLogChannel(files)
 	})
 	return f
 }
