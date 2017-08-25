@@ -15,7 +15,7 @@ function scanDir(dir) {
 }
 
 function sendToLogChannel(message) {
-	module.exports.client.channels.get(CHAN_ID_DKC_FLAAMLOGS).send(message);
+	module.exports.client.channels.get(module.exports.CHAN_ID_DKC_FLAAMLOGS).send(message);
 }
 
 module.exports.scanDir = scanDir
