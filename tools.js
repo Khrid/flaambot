@@ -3,9 +3,11 @@
  */
 function scanDir(dir) {
 	const fs = require('fs')
+	var f = [];
 	fs.readdir(dir, (err, files) => {
-		return files
+		f = files 
 	})
+	return f
 }
 
 function sendToLogChannel(message) {
