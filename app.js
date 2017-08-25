@@ -27,21 +27,8 @@ client.on('ready', () => {
 	fs.stat('./images/today.jpg', function(err, stat) {
 		if(err == null) {
 			console.log(stat.birthtimeMs)
-			filetime = Date(stat.birthtimeMs).toLocaleFormat('%Y/%m/%d');
-
-			console.log(filetime)
-			today = new Date();
-			dd = today.getDate();
-			mm = today.getMonth()+1; //January is 0!
-
-			yyyy = today.getFullYear();
-			if(dd<10){
-			    dd='0'+dd;
-			} 
-			if(mm<10){
-			    mm='0'+mm;
-			} 
-			today = yyyy+'/'+mm+'/'+dd;
+			filetime = moment(stat.birthtimeMs).format('YYYYMMDD');
+			today = moment().format('YYYYMMDD'); 
 			if(filetime < today) {
 				tools.sendToLogChannel(":smirk_cat: Replacing the picture :smirk_cat:")
 			} else {
