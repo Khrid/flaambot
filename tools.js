@@ -5,7 +5,7 @@ function scanDir(dir) {
 	const fs = require('fs')
 	fs.readdir(dir, (err, files) => {
 		if(files.length > 0) {
-			files.foreach(file => {
+			files.forEach(file => {
 				sendToLogChannel(file)
 			})
 		} else {
