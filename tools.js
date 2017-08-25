@@ -10,14 +10,14 @@ function scanDir(dir, callback) {
 	    }
 
 		if(files.length > 0) {
-			files.for(file => {
+			files.foreach(file => {
 				f.push(file)
 			})
 		} else {
 			console.log("empty")
 		}
 
-		callback(null, f)
+		return callback(null, f)
 	})
 }
 
