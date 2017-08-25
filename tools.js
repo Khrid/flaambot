@@ -4,13 +4,7 @@
 function scanDir(dir) {
 	const fs = require('fs')
 	fs.readdir(dir, (err, files) => {
-		if(files.length > 0) {
-			files.forEach(file => {
-				sendToLogChannel(file)
-			})
-		} else {
-			sendToLogChannel("Plus de photos de Flaam");
-		}
+		return files
 	})
 }
 
