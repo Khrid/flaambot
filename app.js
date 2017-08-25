@@ -26,7 +26,26 @@ client.on('ready', () => {
 	
 	fs.stat('./images/today.jpg', function(err, stat) {
 		if(err == null) {
-			tools.sendToLogChannel(":smirk_cat: today.jpg exists :smirk_cat:")
+			console.log(stat.birthdate)
+			filetime = Date(stat.birthtimeMs).toLocaleFormat('%m/%d/%Y');
+
+			today = new Date();
+			dd = today.getDate();
+			mm = today.getMonth()+1; //January is 0!
+
+			yyyy = today.getFullYear();
+			if(dd<10){
+			    dd='0'+dd;
+			} 
+			if(mm<10){
+			    mm='0'+mm;
+			} 
+			today = yyyy+'/'+mm+'/'+dd;
+			if(filetime < today) {
+				tools.sendToLogChannel(":smirk_cat: Replacing the picture :smirk_cat:")
+			} else {
+				tools.sendToLogChannel(":smirk_cat: No need to change the picture yet :smirk_cat:")
+			}
 		} else {
 			fs.readdir('./images/available/', function (err, files) { 
 				if(files.length > 0) {
