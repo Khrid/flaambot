@@ -8,6 +8,7 @@ function scanDir(dir) {
 		try {
 			files.foreach(file => {
 				f.push(file)
+				console.log(file)
 			})
 		} catch(err) {
 			
