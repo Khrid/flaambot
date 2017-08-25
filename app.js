@@ -1,5 +1,6 @@
 // Import the discord.js module
 const Discord = require('discord.js');
+const fs = require('fs')
 var schedule = require('node-schedule');
 var tools = require('./tools')
 
@@ -17,11 +18,31 @@ client.on('ready', () => {
 	var revision = require('child_process')
 	  .execSync('git rev-parse HEAD')
 	  .toString().trim();
-	tools.sendToLogChannel(":smirk_cat: Flaambot starting :smirk_cat:")
-	tools.sendToLogChannel("**revision : **" + revision)
-	tools.sendToLogChannel("ready \:heart_eyes_cat:")
-
-	tools.scanDir('./images/available');
+	var bootMessage = "";
+	bootMessage += ":smirk_cat: Flaambot starting :smirk_cat:"+"\n"
+	bootMessage += "**revision : **" + revision+"\n"
+	bootMessage += "ready \:heart_eyes_cat:"
+	tools.sendToLogChannel(bootMessage)
+	
+	if(fs.exists('./images/today.jpg'), function (exists) {
+		if(exists) {
+		} else {
+			files = tools.scanDir('./images/available')
+			if(files.length > 0) {
+				key = Math.floor(Math.random() * files.length)
+				target = files[key]
+				if(fs.rename('./images/available/'+target, './images/today.jpg'), function (success) {
+					if(success) {
+						tools.sendToLogChannel(":smirk_cat: today.jpg updated :smirk_cat:")
+					} else {
+						tools.sendToLogChannel(":scream_cat: Could not create today.jpg :scream_cat:")
+					}
+				}) {}
+			} else {
+				tools.sendToLogChannel(":scream_cat: No more pics :scream_cat:");
+			}
+		}
+	})
 	
     var rule = new schedule.RecurrenceRule();
     rule.minute = 0;
