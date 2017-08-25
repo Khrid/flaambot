@@ -1,7 +1,7 @@
 /**
  * http://usejsdoc.org/
  */
-function scanDir(dir) {
+function scanDir(dir, callback) {
 	const fs = require('fs')
 	fs.readdir(dir, (err, files) => {
 		if (err) {
@@ -16,6 +16,8 @@ function scanDir(dir) {
 			console.log("empty")
 		}
 	})
+	console.log(files)
+	callback(files)
 }
 
 function sendToLogChannel(message) {
