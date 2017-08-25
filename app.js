@@ -35,8 +35,8 @@ client.on('message', message => {
 	    message.channel.send('Here is a list of available images :');
 	  }
 	  if (message.content === '!usedImages') {
-		    // Send "pong" to the same channel
-		    message.channel.send('Here is a list of used images :');
+		  // Send "pong" to the same channel
+		  message.channel.send('Here is a list of used images :');
 	  }
 });
 
