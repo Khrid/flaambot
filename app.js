@@ -8,7 +8,7 @@ const CHAN_ID_DKC_FLAAMLOGS = "350728940501073924";
 const CHAN_ID_QGS_FLAAMCHAN = "330420560972742656";
 
 // Create an instance of a Discord client
-const client = new Discord.Client();
+var client = new Discord.Client();
 
 client.on('ready', () => { 
 	var revision = require('child_process')
