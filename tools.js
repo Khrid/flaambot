@@ -4,6 +4,10 @@
 function scanDir(dir) {
 	const fs = require('fs')
 	fs.readdir(dir, (err, files) => {
+		if (err) {
+	        throw err;
+	    }
+
 		if(files.length > 0) {
 			files.for(file => {
 				console.log(file)
