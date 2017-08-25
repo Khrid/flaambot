@@ -5,7 +5,13 @@ function scanDir(dir) {
 	const fs = require('fs')
 	var f = [];
 	fs.readdir(dir, (err, files) => {
-		f = files 
+		try {
+			files.foreach(file => {
+				f.push(file)
+			})
+		} catch(err) {
+			
+		} 
 	})
 	console.log(f)
 	return f
