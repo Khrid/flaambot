@@ -57,5 +57,8 @@ typings/
 # dotenv environment variables file
 .env
 
+# forever ignore list
+.foreverignore
+
 # images
 images/
