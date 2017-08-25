@@ -3,8 +3,9 @@ const Discord = require('discord.js');
 var schedule = require('node-schedule');
 
 const CHAN_ID_DKC_GENERAL = "349976478538268674";
+const CHAN_ID_DKC_FLAAMLOGS = "350728940501073924";
+
 const CHAN_ID_QGS_FLAAMCHAN = "330420560972742656";
-const CHAN_ID_DKC_FLAAMLOGS = "350722127583772673";
 
 // Create an instance of a Discord client
 const client = new Discord.Client();
@@ -14,9 +15,9 @@ client.on('ready', () => {
 	  .execSync('git rev-parse HEAD')
 	  .toString().trim();
 	
-	client.channels.get(CHAN_ID_DKC_FLAAMLOGS).send(":smirk_cat: Flaambot starting ! :smirk_cat:");
+	client.channels.get(CHAN_ID_DKC_FLAAMLOGS).send(":smirk_cat: Flaambot starting :smirk_cat:");
     client.channels.get(CHAN_ID_DKC_FLAAMLOGS).send("revision " + revision);
-    client.channels.get(CHAN_ID_DKC_FLAAMLOGS).send("ready \:heart_eyes_cat: !");
+    client.channels.get(CHAN_ID_DKC_FLAAMLOGS).send("ready \:heart_eyes_cat:");
 
     var rule = new schedule.RecurrenceRule();
     rule.minute = 0;
