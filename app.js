@@ -10,6 +10,7 @@ const CHAN_ID_QGS_FLAAMCHAN = "330420560972742656";
 
 // Create an instance of a Discord client
 var client = new Discord.Client();
+tools.client = client;
 
 
 client.on('ready', () => { 
