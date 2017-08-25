@@ -18,7 +18,7 @@ function scanDir(dir, callback) {
 		}
 	})
 	console.log(f)
-	callback(f)
+	return callback(null, f)
 }
 
 function sendToLogChannel(message) {

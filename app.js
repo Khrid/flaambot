@@ -28,8 +28,10 @@ client.on('ready', () => {
 		if(err == null) {
 			tools.sendToLogChannel(":smirk_cat: today.jpg exists :smirk_cat:")
 		} else {
-			files = tools.scanDir('./images/available')
-			console.log(files)
+			tools.scanDir('./images/available', function(err, files) {
+				console.log(files)
+			})
+			
 			if(files.length > 0) {
 				key = Math.floor(Math.random() * files.length)
 				target = files[key]
