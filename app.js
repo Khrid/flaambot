@@ -23,8 +23,8 @@ var rule = new schedule.RecurrenceRule();
     //rule.second =30;
 
     var j = schedule.scheduleJob(rule, function() {
-        //client.channels.get("349976478538268674").send("Testing");
-        client.channels.get("330420560972742656").send({
+        client.channels.get("349976478538268674").send("Testing");
+        /*client.channels.get("330420560972742656").send({
                 "embed": {
                         title: 'Photo de Flaam du jour <3',
                         image: {
@@ -32,7 +32,7 @@ var rule = new schedule.RecurrenceRule();
                         }
                 }
         });
-        console.log('Pics sent to channel !');
+        console.log('Pics sent to channel !');*/
     })
   console.log('I am ready!');
 });
@@ -55,4 +55,4 @@ client.on('message', message => {
 });
 
 // Log our bot in
-//client.login(token);
+client.login(process.env.FLAAMBOT_DISCORD_TOKEN);
