@@ -3,19 +3,15 @@
  */
 function scanDir(dir) {
 	const fs = require('fs')
-	var f = [];
 	fs.readdir(dir, (err, files) => {
-		try {
-			files.foreach(file => {
-				f.push(file)
+		if(files.length > 0) {
+			files.for(file => {
 				console.log(file)
 			})
-		} catch(err) {
-			
-		} 
+		} else {
+			console.log("empty")
+		}
 	})
-	console.log(f)
-	return f
 }
 
 function sendToLogChannel(message) {
