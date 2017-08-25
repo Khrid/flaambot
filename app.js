@@ -28,7 +28,7 @@ client.on('ready', () => {
 		if(err == null) {
 			tools.sendToLogChannel(":smirk_cat: today.jpg exists :smirk_cat:")
 		} else {
-			fs.readdir(dir, function (err, files) { 
+			fs.readdir('./images/available/', function (err, files) { 
 				if(files.length > 0) {
 					key = Math.floor(Math.random() * files.length)
 					target = files[key]
