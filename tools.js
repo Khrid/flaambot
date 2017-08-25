@@ -20,6 +20,6 @@ sendToLogChannel: function (message) {
 	module.exports.client.channels.get(CHAN_ID_DKC_FLAAMLOGS).send(message);
 },
 
-client = null
+client = 0
 
 }
