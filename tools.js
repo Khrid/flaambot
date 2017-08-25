@@ -16,7 +16,7 @@ scanDir: function (dir) {
 	})
 },
 
-sentToLogChannel: function (message) {
+sendToLogChannel: function (message) {
     client.channels.get(CHAN_ID_DKC_FLAAMLOGS).send(message);
 }
 
