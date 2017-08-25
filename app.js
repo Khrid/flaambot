@@ -26,9 +26,10 @@ client.on('ready', () => {
 	
 	fs.stat('./images/today.jpg', function(err, stat) {
 		if(err == null) {
-			console.log(stat.birthdate)
-			filetime = Date(stat.birthtimeMs).toLocaleFormat('%m/%d/%Y');
+			console.log(stat.birthtimeMs)
+			filetime = Date(stat.birthtimeMs).toLocaleFormat('%Y/%m/%d');
 
+			console.log(filetime)
 			today = new Date();
 			dd = today.getDate();
 			mm = today.getMonth()+1; //January is 0!
