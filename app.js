@@ -9,6 +9,11 @@ const CHAN_ID_QGS_FLAAMCHAN = "330420560972742656";
 const client = new Discord.Client();
 
 client.on('ready', () => {
+	var revision = require('child_process')
+	  .execSync('git rev-parse HEAD')
+	  .toString().trim();
+
+    client.channels.get(CHAN_ID_DKC_GENERAL).send("Flaambot updated to revision " + revision);
     client.channels.get(CHAN_ID_DKC_GENERAL).send("Flaambot ready \:heart_eyes_cat: !");
 
     var rule = new schedule.RecurrenceRule();
