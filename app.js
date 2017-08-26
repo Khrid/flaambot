@@ -24,6 +24,7 @@ client.on('ready', () => {
 	bootMessage += "rev : " + revision+"\n"
 	bootMessage += "ready :heart_eyes_cat:"
 	tools.sendToLogChannel(bootMessage)
+	client.fetchUser("133313104162455552").send('Flaambot (re)démarré !')
 	
 	
 	
@@ -102,6 +103,7 @@ client.on('ready', () => {
           });
     });
 });
+
 
 // Create an event listener for messages
 client.on('message', message => {
