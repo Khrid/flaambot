@@ -127,11 +127,11 @@ client.on("ready", () => {
 // Create an event listener for messages
 client.on("message", message => {
 
-	if(message.content === "!time") {
+	if(message.content === "!time" && message.channel.id == CHAN_ID_QGS_FLAAMCHAN) {
 		var time = moment().add(1, "days")
 		time = moment(time).hours(6).minutes(0).seconds(0).milliseconds(0)
 		time = time.fromNow()
-		client.channels.get(CHAN_ID_DKC_FLAAMLOGS).send("-> time : "+time)
+		client.channels.get(CHAN_ID_QGS_FLAAMCHAN).send("La prochaine photo de Flaam sera envoyée "+time+" :kissing_cat:")
 	}
 	
 	if(message.author.id == FLAAMBOT_KHRID_ID || message.author.id == FLAAMBOT_AERIN_ID) {
