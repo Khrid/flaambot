@@ -32,7 +32,7 @@ client.on('ready', () => {
 	tools.sendToLogChannel(bootMessage)
 	client.fetchUser(FLAAMBOT_KHRID_ID).then(user => {user.send('Flaambot (re)démarré !')})
 	
-	glob("./images/today.*", options, function (er, files) {
+	glob("./images/today.*", function (er, files) {
 		console.log(files)
 	})
 	var rule = new schedule.RecurrenceRule()
