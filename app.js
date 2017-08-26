@@ -3,10 +3,11 @@ const Discord = require("discord.js")
 const fs = require("fs")
 var schedule = require("node-schedule")
 var moment = require("moment")
-var tools = require("./tools")
 var https = require ("https")
 var crypto = require("crypto")
 var glob = require("glob")
+var path = require("path")
+var tools = require("./tools")
 
 const CHAN_ID_DKC_GENERAL = "349976478538268674";
 const CHAN_ID_DKC_FLAAMLOGS = "350728940501073924"
@@ -34,18 +35,7 @@ client.on("ready", () => {
 	client.fetchUser(FLAAMBOT_KHRID_ID).then(user => {user.send("Flaambot (re)démarré !")})
 	
 	
-    	fs.readdirSync("./images/", function (err, files) {
-    		var ext = ""
-    		files.forEach(function(file) {
-    	    	fs.stat("./images/"+file, function(err, stat) {
-    	    		console.log(file)
-    	    		if(!stat.isDirectory() && file.startsWith("today.")) {
-    	    			ext = file.split(".").pop()
-        	    		console.log(ext)
-    	    		}
-    	    	})
-    		})
-    	})
+    		
 	
 	var rule = new schedule.RecurrenceRule()
     //rule.minute = 30
@@ -57,68 +47,71 @@ client.on("ready", () => {
     	/**
 		 * Processing what"s need to
 		 */
-    	
-    	fs.stat("./images/today."+ext, function(err, stat) {
-    		if(err == null) {
-    			filetime = moment(stat.birthtimeMs).format("YYYYMMDD");
-    			today = moment().format("YYYYMMDD");
-    			// today = moment(today).add(1, "days").format("YYYYMMDD");
-    			console.log(filetime + " - " + today)
-    			if(filetime < today) {
-    				action = "Replacing the picture"
-    				fs.rename("./images/today."+ext+"", "./images/used/"+filetime+"."+ext+"", function (err) {
-    					if(!err) {
-    						fs.readdir("./images/available/", function (err, files) { 
-    							if(files.length > 0) {
-    								key = Math.floor(Math.random() * files.length)
-    								target = files[key]
-    								fs.rename("./images/available/"+target, "./images/today."+ext+""), function (success) {
-    									fs.stat("./images/today."+ext+"", function(err, stat) {
-    										if(err == null) {
-    											action = "today."+ext+" updated"
-    										} else {
-    											action = ":scream_cat: Could not create today."+ext+" :scream_cat:"
-    										}
-    									})
-    								}
-    								if(files.length < 2) {
-        		    					client.fetchUser(FLAAMBOT_KHRID_ID).then(user => {user.send("Il ne rest plus beaucoup de photos de Flaam :crying_cat_face:")})
-    								}
-    							} else {
-    								action = ":scream_cat: No more pics :scream_cat:";
-    		    					client.fetchUser(FLAAMBOT_KHRID_ID).then(user => {user.send(action)})
-    							}
-    						})
-    					} else {
-    						action = ":scream_cat: Could not move old today."+ext+" to used folder :scream_cat:"
-    					}
-    				})
-    			} else {
-    				action = "No need to change the picture yet"
-    			}
-    		} else {
-    			fs.readdir("./images/available/", function (err, files) { 
-    				if(files.length > 0) {
-    					key = Math.floor(Math.random() * files.length)
-    					target = files[key]
-    					fs.rename("./images/available/"+target, "./images/today.."+ext+""), function (success) {
-    						fs.stat("./images/today."+ext+"", function(err, stat) {
-    							if(err == null) {
-    								action = "today."+ext+" updated"
-    							} else {
-    								action = ":scream_cat: Could not create today."+ext+" :scream_cat:"
-    							}
-    						})
-    					}
-    				} else {
-    					action = ":scream_cat: No more pics :scream_cat:";
-    					client.fetchUser(FLAAMBOT_KHRID_ID).then(user => {user.send(action)})
-    				}
-    			})
-    		}
-        	tools.sendToLogChannel("Action : " + action);
-    	});
-    	
+
+    	glob("./images/today.*", function (err, files) {
+    		ext = files.split(".").pop()
+	    	fs.stat("./images/today."+ext, function(err, stat) {
+	    		if(err == null) {
+	    			filetime = moment(stat.birthtimeMs).format("YYYYMMDD");
+	    			today = moment().format("YYYYMMDD");
+	    			// today = moment(today).add(1, "days").format("YYYYMMDD");
+	    			console.log(filetime + " - " + today)
+	    			if(filetime < today) {
+	    				action = "Replacing the picture"
+	    				fs.rename("./images/today."+ext+"", "./images/used/"+filetime+"."+ext+"", function (err) {
+	    					if(!err) {
+	    						fs.readdir("./images/available/", function (err, files) { 
+	    							if(files.length > 0) {
+	    								key = Math.floor(Math.random() * files.length)
+	    								target = files[key]
+	    								fs.rename("./images/available/"+target, "./images/today."+ext+""), function (success) {
+	    									fs.stat("./images/today."+ext+"", function(err, stat) {
+	    										if(err == null) {
+	    											action = "today."+ext+" updated"
+	    										} else {
+	    											action = ":scream_cat: Could not create today."+ext+" :scream_cat:"
+	    										}
+	    									})
+	    								}
+	    								if(files.length < 2) {
+	        		    					client.fetchUser(FLAAMBOT_KHRID_ID).then(user => {user.send("Il ne rest plus beaucoup de photos de Flaam :crying_cat_face:")})
+	    								}
+	    							} else {
+	    								action = ":scream_cat: No more pics :scream_cat:";
+	    		    					client.fetchUser(FLAAMBOT_KHRID_ID).then(user => {user.send(action)})
+	    							}
+	    						})
+	    					} else {
+	    						action = ":scream_cat: Could not move old today."+ext+" to used folder :scream_cat:"
+	    					}
+	    				})
+	    			} else {
+	    				action = "No need to change the picture yet"
+	    			}
+	    		} else {
+	    			fs.readdir("./images/available/", function (err, files) { 
+	    				if(files.length > 0) {
+	    					key = Math.floor(Math.random() * files.length)
+	    					target = files[key]
+	    					fs.rename("./images/available/"+target, "./images/today.."+ext+""), function (success) {
+	    						fs.stat("./images/today."+ext+"", function(err, stat) {
+	    							if(err == null) {
+	    								action = "today."+ext+" updated"
+	    							} else {
+	    								action = ":scream_cat: Could not create today."+ext+" :scream_cat:"
+	    							}
+	    						})
+	    					}
+	    				} else {
+	    					action = ":scream_cat: No more pics :scream_cat:";
+	    					client.fetchUser(FLAAMBOT_KHRID_ID).then(user => {user.send(action)})
+	    				}
+	    			})
+	    		}
+	        	tools.sendToLogChannel("Action : " + action);
+	    	})
+
+    	})
         // client.channels.get(CHAN_ID_DKC_GENERAL).send("Testing change");
         client.channels.get(CHAN_ID_DKC_GENERAL).send("Photo de Flaam du jour :heart_eyes_cat:", {
             files: [
