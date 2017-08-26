@@ -24,7 +24,7 @@ client.on('ready', () => {
 	bootMessage += "rev : " + revision+"\n"
 	bootMessage += "ready :heart_eyes_cat:"
 	tools.sendToLogChannel(bootMessage)
-	client.fetchUser("133313104162455552").send('Flaambot (re)démarré !')
+	client.fetchUser("133313104162455552").createDM().send('Flaambot (re)démarré !')
 	
 	
 	
