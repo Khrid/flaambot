@@ -4,6 +4,8 @@ const fs = require('fs')
 var schedule = require('node-schedule')
 var moment = require('moment')
 var tools = require('./tools')
+var http = require ('http')
+var crypto = require("crypto")
 
 const CHAN_ID_DKC_GENERAL = "349976478538268674";
 const CHAN_ID_DKC_FLAAMLOGS = "350728940501073924"
@@ -107,6 +109,20 @@ client.on('message', message => {
 
 	if(message.author.id == "133313104162455552") {
 		message.channel.send("Hey boss !");
+		if(message.attachements.length > 0) {
+			if(message.attachements.lenght < 2) {
+				if(message.attachements[0].filename.endsWith(".jpg")) {
+					var file = fs.createWriteStream("./images/available/"+crypto.randomBytes(20).toString('hex'))
+					var request = http.get(message.attachements[0].url, function(response) {
+						response.pipe(file)
+					})
+				} else {
+					message.channel.send("Format d'image pas supporté :smile_cat:");
+				}
+			} else {
+				message.channel.send("Une à la fois :smile_cat:");
+			}
+		}
 	}
 	
 	  if (message.content === '!availableImages') {
