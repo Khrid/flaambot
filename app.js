@@ -108,10 +108,9 @@ client.on('ready', () => {
 client.on('message', message => {
 
 	if(message.author.id == "133313104162455552") {
-		if(message.attachments.lastKey() > 0) {
-			console.log(message.attachments.lastKey())
-			console.log(message.attachments.first().url)			
-			if(message.attachments.lastKey() < 2) {
+		console.log(message.attachments.size())
+		if(message.attachments.size > 0) {			
+			if(message.attachments.size < 2) {
 				if(message.attachments.first().filename.endsWith(".jpg")) {
 					var file = fs.createWriteStream("./images/available/"+crypto.randomBytes(20).toString('hex'))
 					var request = http.get(message.attachments.first().url, function(response) {
