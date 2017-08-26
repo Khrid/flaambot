@@ -49,7 +49,7 @@ client.on("ready", () => {
 		 */
 
     	glob("./images/today.*", function (err, files) {
-    		ext = files.split(".").pop()
+    		ext = files[0].split(".").pop()
 	    	fs.stat("./images/today."+ext, function(err, stat) {
 	    		if(err == null) {
 	    			filetime = moment(stat.birthtimeMs).format("YYYYMMDD");
