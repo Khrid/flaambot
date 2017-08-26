@@ -52,6 +52,7 @@ client.on("ready", () => {
     	    		console.log(file)
     	    		if(!stat.isDirectory() && file.startsWith("today.")) {
     	    			ext = file.split(".").pop()
+        	    		console.log(ext)
     	    		}
     	    	})
     		})
