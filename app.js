@@ -34,7 +34,7 @@ client.on("ready", () => {
 	client.fetchUser(FLAAMBOT_KHRID_ID).then(user => {user.send("Flaambot (re)démarré !")})
 	
 	
-    	fs.readdir("./images/", function (err, files) {
+    	fs.readdirSync("./images/", function (err, files) {
     		var ext = ""
     		files.forEach(function(file) {
     	    	fs.stat("./images/"+file, function(err, stat) {
@@ -45,7 +45,6 @@ client.on("ready", () => {
     	    		}
     	    	})
     		})
-    		console.log(ext)
     	})
 	
 	var rule = new schedule.RecurrenceRule()
