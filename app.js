@@ -33,7 +33,7 @@ client.on('ready', () => {
 	client.fetchUser(FLAAMBOT_KHRID_ID).then(user => {user.send('Flaambot (re)démarré !')})
 	
 	glob("./images/today.*", function (er, files) {
-		console.log(files)
+		console.log(files[0].split(".").pop())		
 	})
 	var rule = new schedule.RecurrenceRule()
     //rule.minute = 30
