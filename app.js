@@ -10,6 +10,9 @@ var crypto = require("crypto")
 const CHAN_ID_DKC_GENERAL = "349976478538268674";
 const CHAN_ID_DKC_FLAAMLOGS = "350728940501073924"
 const CHAN_ID_QGS_FLAAMCHAN = "330420560972742656"
+	
+const FLAAMBOT_KHRID_ID = process.env.FLAAMBOT_KHRID_ID
+const FLAAMBOT_AERIN_ID = process.env.FLAAMBOT_AERIN_ID
 
 var action = ""
 var client = new Discord.Client();
@@ -26,17 +29,17 @@ client.on('ready', () => {
 	bootMessage += "rev : " + revision+"\n"
 	bootMessage += "ready :heart_eyes_cat:"
 	tools.sendToLogChannel(bootMessage)
-	client.fetchUser("133313104162455552").then(user => {user.send('Flaambot (re)démarré !')})
+	client.fetchUser(FLAAMBOT_KHRID_ID).then(user => {user.send('Flaambot (re)démarré !')})
 	
 	var rule = new schedule.RecurrenceRule()
-    rule.minute = 30
-    // rule.hour = 6
+    //rule.minute = 30
+    rule.hour = 6
     // rule.second = 30
 
     var j = schedule.scheduleJob(rule, function() {
     	
     	/**
-		 * Processing what's needed to do
+		 * Processing what's need to
 		 */
     	fs.stat('./images/today.jpg', function(err, stat) {
     		if(err == null) {
@@ -63,6 +66,7 @@ client.on('ready', () => {
     								}
     							} else {
     								action = ":scream_cat: No more pics :scream_cat:";
+    		    					client.fetchUser("133313104162455552").then(user => {user.send(action)})
     							}
     						})
     					} else {
@@ -88,6 +92,7 @@ client.on('ready', () => {
     					}
     				} else {
     					action = ":scream_cat: No more pics :scream_cat:";
+    					client.fetchUser("133313104162455552").then(user => {user.send(action)})
     				}
     			})
     		}
@@ -107,15 +112,11 @@ client.on('ready', () => {
 // Create an event listener for messages
 client.on('message', message => {
 
-	if(message.author.id == "133313104162455552") {
+	if(message.author.id == FLAAMBOT_KHRID_ID || message.author.id == FLAAMBOT_AERIN_ID) {
 		if(message.attachments.size > 0) {			
 			if(message.attachments.size < 2) {
 				if(message.attachments.first().filename.endsWith(".jpg")) {
 					var newFile = crypto.randomBytes(20).toString('hex')+".jpg"
-					
-					
-					
-					
 					var download = function(url, dest, cb) {
 					  var file = fs.createWriteStream(dest);
 					  var request = https.get(url, function(response) {
@@ -130,7 +131,7 @@ client.on('message', message => {
 					    	            ]
 					    	          });
 					    			      
-					            	tools.sendImageToLogChannel("New pic uploaded", "./images/available/"+newFile);
+					            	tools.sendImageToLogChannel("New pic uploaded ("+newFile+")", "./images/available/"+newFile);
 					    		}
 					    })
 					    });
@@ -147,18 +148,8 @@ client.on('message', message => {
 			} else {
 				message.channel.send("Une à la fois :smile_cat:");
 			}
-		} else {
 		}
 	}
-	
-	  if (message.content === '!availableImages') {
-	    // Send "pong" to the same channel
-	    message.channel.send('Here is a list of available images :');
-	  }
-	  if (message.content === '!usedImages') {
-		  // Send "pong" to the same channel
-		  message.channel.send('Here is a list of used images :');
-	  }
 });
 
 // Log our bot in
