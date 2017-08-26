@@ -23,14 +23,14 @@ client.on('ready', () => {
 	var bootMessage = "";
 	bootMessage += ":smirk_cat: Flaambot starting :smirk_cat:"+"\n"
 	bootMessage += "**revision : **" + revision+"\n"
-	bootMessage += "ready \:heart_eyes_cat:"
+	bootMessage += "ready :heart_eyes_cat:"
 	tools.sendToLogChannel(bootMessage)
 	
 	fs.stat('./images/today.jpg', function(err, stat) {
 		if(err == null) {
 			filetime = moment(stat.birthtimeMs).format('YYYYMMDD');
 			today = moment().format('YYYYMMDD');
-			today = moment(today).add(1, "days").format('YYYYMMDD');
+			//today = moment(today).add(1, "days").format('YYYYMMDD');
 			console.log(filetime + " - " + today)
 			if(filetime < today) {
 				tools.sendToLogChannel(":smirk_cat: Replacing the picture :smirk_cat:")
@@ -84,17 +84,16 @@ client.on('ready', () => {
 	
     var rule = new schedule.RecurrenceRule();
     rule.minute = 0;
-    rule.hour = 6;
-    // rule.second =30;
+    //rule.hour = 6;
+    rule.second =30;
 
     var j = schedule.scheduleJob(rule, function() {
-        client.channels.get(CHAN_ID_DKC_GENERAL).send("Testing change");
-        /*
-		 * client.channels.get("330420560972742656").send({ "embed": { title:
-		 * 'Photo de Flaam du jour <3', image: { "url" :
-		 * "http://172.104.154.243/pics/today.jpg" } } }); console.log('Pics
-		 * sent to channel !');
-		 */
+        //client.channels.get(CHAN_ID_DKC_GENERAL).send("Testing change");
+        client.channels.get(CHAN_ID_DKC_GENERAL).send("Photo de Flaam du jour :heart_eyes_cat:", {
+            files: [
+              "./images/today.jpg"
+            ]
+          });
     });
 });
 
