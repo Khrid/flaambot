@@ -122,6 +122,9 @@ client.on('message', message => {
 			} else {
 				message.channel.send("Une à la fois :smile_cat:");
 			}
+		} else {
+			console.log("?")
+			console.log(message)
 		}
 	}
 	
