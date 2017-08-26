@@ -34,17 +34,6 @@ client.on("ready", () => {
 	client.fetchUser(FLAAMBOT_KHRID_ID).then(user => {user.send("Flaambot (re)démarré !")})
 	
 	
-	var rule = new schedule.RecurrenceRule()
-    //rule.minute = 30
-    //rule.hour = 6
-    rule.second = 30
-
-    var j = schedule.scheduleJob(rule, function() {
-    	
-    	/**
-		 * Processing what"s need to
-		 */
-    	
     	fs.readdir("./images/", function (err, files) {
     		var ext = ""
     		files.forEach(function(file) {
@@ -58,6 +47,18 @@ client.on("ready", () => {
     		})
     		console.log(ext)
     	})
+	
+	var rule = new schedule.RecurrenceRule()
+    //rule.minute = 30
+    //rule.hour = 6
+    rule.second = 30
+
+    var j = schedule.scheduleJob(rule, function() {
+    	
+    	/**
+		 * Processing what"s need to
+		 */
+    	
     	fs.stat("./images/today."+ext, function(err, stat) {
     		if(err == null) {
     			filetime = moment(stat.birthtimeMs).format("YYYYMMDD");
