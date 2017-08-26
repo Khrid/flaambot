@@ -30,19 +30,19 @@ client.on('ready', () => {
 	
 	var rule = new schedule.RecurrenceRule()
     rule.minute = 30
-    //rule.hour = 6
-    //rule.second = 30
+    // rule.hour = 6
+    // rule.second = 30
 
     var j = schedule.scheduleJob(rule, function() {
     	
     	/**
-    	 * Processing what's needed to do
-    	 */
+		 * Processing what's needed to do
+		 */
     	fs.stat('./images/today.jpg', function(err, stat) {
     		if(err == null) {
     			filetime = moment(stat.birthtimeMs).format('YYYYMMDD');
     			today = moment().format('YYYYMMDD');
-    			//today = moment(today).add(1, "days").format('YYYYMMDD');
+    			// today = moment(today).add(1, "days").format('YYYYMMDD');
     			console.log(filetime + " - " + today)
     			if(filetime < today) {
     				action = "Replacing the picture"
@@ -94,7 +94,7 @@ client.on('ready', () => {
         	tools.sendToLogChannel('Action : ' + action);
     	});
     	
-        //client.channels.get(CHAN_ID_DKC_GENERAL).send("Testing change");
+        // client.channels.get(CHAN_ID_DKC_GENERAL).send("Testing change");
         client.channels.get(CHAN_ID_DKC_GENERAL).send("Photo de Flaam du jour :heart_eyes_cat:", {
             files: [
               "./images/today.jpg"
@@ -108,13 +108,29 @@ client.on('ready', () => {
 client.on('message', message => {
 
 	if(message.author.id == "133313104162455552") {
-		console.log(message.attachments.size)
 		if(message.attachments.size > 0) {			
 			if(message.attachments.size < 2) {
 				if(message.attachments.first().filename.endsWith(".jpg")) {
-					var file = fs.createWriteStream("./images/available/"+crypto.randomBytes(20).toString('hex')+".jpg")
+					var newFile = crypto.randomBytes(20).toString('hex')+".jpg"
+					var file = fs.createWriteStream("./images/available/"+newFile)
 					var request = https.get(message.attachments.first().url, function(response) {
 						response.pipe(file)
+										
+				    	fs.stat("./images/available/"+newFile, function(err, stat) {
+				    		if(err == null) {
+				    			message.send("Photo ajoutée !", {
+				    	            files: [
+				    	            	"./images/available/"+newFile
+				    	            ]
+				    	          });
+
+				            	tools.sendToLogChannel("New pic uploaded", {
+				    	            files: [
+				    	            	"./images/available/"+newFile
+				    	            ]
+				    	          });
+				    		}
+				    	})
 					})
 				} else {
 					message.channel.send("Format d'image pas supporté :smile_cat:");
@@ -123,8 +139,6 @@ client.on('message', message => {
 				message.channel.send("Une à la fois :smile_cat:");
 			}
 		} else {
-			console.log("?")
-			console.log(message)
 		}
 	}
 	
