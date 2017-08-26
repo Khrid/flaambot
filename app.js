@@ -59,18 +59,18 @@ client.on("ready", () => {
 	    			console.log(filetime + " - " + today)
 	    			if(filetime < today) {
 	    				action = "Replacing the picture"
-	    				fs.rename("./images/today."+ext+"", "./images/used/"+filetime+"."+ext+"", function (err) {
+	    				fs.rename("./images/"+files, "./images/used/"+files, function (err) {
 	    					if(!err) {
 	    						fs.readdir("./images/available/", function (err, files) { 
 	    							if(files.length > 0) {
 	    								key = Math.floor(Math.random() * files.length)
 	    								target = files[key]
-	    								fs.rename("./images/available/"+target, "./images/today."+ext+""), function (success) {
-	    									fs.stat("./images/today."+ext+"", function(err, stat) {
+	    								fs.rename("./images/available/"+target, "./images/"+target), function (success) {
+	    									fs.stat("./images/"+target, function(err, stat) {
 	    										if(err == null) {
-	    											action = "today."+ext+" updated"
+	    											action = "today's pic updated"
 	    										} else {
-	    											action = ":scream_cat: Could not create today."+ext+" :scream_cat:"
+	    											action = ":scream_cat: Could not create today's pic :scream_cat:"
 	    										}
 	    									})
 	    								}
@@ -83,7 +83,7 @@ client.on("ready", () => {
 	    							}
 	    						})
 	    					} else {
-	    						action = ":scream_cat: Could not move old today."+ext+" to used folder :scream_cat:"
+	    						action = ":scream_cat: Could not move old today to used folder :scream_cat:"
 	    					}
 	    				})
 	    			} else {
@@ -94,12 +94,12 @@ client.on("ready", () => {
 	    				if(files.length > 0) {
 	    					key = Math.floor(Math.random() * files.length)
 	    					target = files[key]
-	    					fs.rename("./images/available/"+target, "./images/today.."+ext+""), function (success) {
-	    						fs.stat("./images/today."+ext+"", function(err, stat) {
+	    					fs.rename("./images/available/"+target, "./images/"+target), function (success) {
+	    						fs.stat("./images/"+target, function(err, stat) {
 	    							if(err == null) {
-	    								action = "today."+ext+" updated"
+	    								action = "today's pic updated"
 	    							} else {
-	    								action = ":scream_cat: Could not create today."+ext+" :scream_cat:"
+	    								action = ":scream_cat: Could not create today's pic :scream_cat:"
 	    							}
 	    						})
 	    					}
@@ -116,7 +116,7 @@ client.on("ready", () => {
         // client.channels.get(CHAN_ID_DKC_GENERAL).send("Testing change");
         client.channels.get(CHAN_ID_DKC_GENERAL).send("Photo de Flaam du jour :heart_eyes_cat:", {
             files: [
-              "./images/today."+ext+""
+              "./images/"+files
             ]
           });
     });
