@@ -112,26 +112,35 @@ client.on('message', message => {
 			if(message.attachments.size < 2) {
 				if(message.attachments.first().filename.endsWith(".jpg")) {
 					var newFile = crypto.randomBytes(20).toString('hex')+".jpg"
-					var file = fs.createWriteStream("./images/available/"+newFile)
-					var request = https.get(message.attachments.first().url, function(response) {
-						response.pipe(file)
-										
-				    	fs.stat("./images/available/"+newFile, function(err, stat) {
-				    		if(err == null) {
-				    			message.channel.send("Photo ajoutée !", {
-				    	            files: [
-				    	            	"./images/available/"+newFile
-				    	            ]
-				    	          });
+					
+					var download = function(url, dest, cb) {
+					  var file = fs.createWriteStream("./images/available/"+newFile);
+					  var request = https.get(url, function(response) {
+					    response.pipe(file);
+					    file.on('finish', function() {
+					      file.close(cb);  // close() is async, call cb after close completes.
+					      fs.stat("./images/available/"+newFile, function(err, stat) {
+					    		if(err == null) {
+					    			message.channel.send("Photo ajoutée !", {
+					    	            files: [
+					    	            	"./images/available/"+newFile
+					    	            ]
+					    	          });
 
-				            	tools.sendToLogChannel("New pic uploaded", {
-				    	            files: [
-				    	            	"./images/available/"+newFile
-				    	            ]
-				    	          });
-				    		}
-				    	})
-					})
+					            	tools.sendToLogChannel("New pic uploaded", {
+					    	            files: [
+					    	            	"./images/available/"+newFile
+					    	            ]
+					    	          });
+					    		}
+					    	})
+					    });
+					  }).on('error', function(err) { // Handle errors
+					    fs.unlink(dest); // Delete the file async. (But we don't check the result)
+					    if (cb) cb(err.message);
+					    console.log(err.message);
+					  });
+					};
 				} else {
 					message.channel.send("Format d'image pas supporté :smile_cat:");
 				}
