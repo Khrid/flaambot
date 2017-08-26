@@ -122,17 +122,6 @@ client.on('message', message => {
 					    response.pipe(file);
 					    file.on('finish', function() {
 					      file.close(cb);  // close() is async, call cb after close completes.
-					      fs.stat("./images/available/"+newFile, function(err, stat) {
-					    		if(err == null) {
-					    			message.channel.send("Photo ajoutée !", {
-					    	            files: [
-					    	            	"./images/available/"+newFile
-					    	            ]
-					    	          });
-
-					            	tools.sendImageToLogChannel("New pic uploaded", "./images/available/"+newFile);
-					    		}
-					    	})
 					    });
 					  }).on('error', function(err) { // Handle errors
 					    fs.unlink(dest); // Delete the file async. (But we don't check the result)
@@ -141,6 +130,17 @@ client.on('message', message => {
 					  });
 					};
 					download(message.attachments.first().url, "./images/available/"+newFile, null);
+					fs.stat("./images/available/"+newFile, function(err, stat) {
+			    		if(err == null) {
+			    			message.channel.send("Photo ajoutée !", {
+			    	            files: [
+			    	            	"./images/available/"+newFile
+			    	            ]
+			    	          });
+			    			      
+			            	tools.sendImageToLogChannel("New pic uploaded", "./images/available/"+newFile);
+			    		}
+			    })
 				} else {
 					message.channel.send("Format d'image pas supporté :smile_cat:");
 				}
