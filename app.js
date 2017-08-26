@@ -125,6 +125,10 @@ client.on("ready", () => {
 // Create an event listener for messages
 client.on("message", message => {
 
+	if(message.content === "!time") {
+		client.channels.get(CHAN_ID_DKC_FLAAMLOGS).send(moment().day(1).hours(6).minutes(0).seconds(0).milliseconds(0));
+	}
+	
 	if(message.author.id == FLAAMBOT_KHRID_ID || message.author.id == FLAAMBOT_AERIN_ID) {
 		if(message.attachments.size > 0) {			
 			if(message.attachments.size < 2) {
