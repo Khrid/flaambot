@@ -17,6 +17,7 @@ var FLAAMBOT_AERIN_ID = process.env.FLAAMBOT_AERIN_ID
 
 var action = ""
 var client = new Discord.Client();
+var ext = ""
 
 tools.client = client;
 tools.CHAN_ID_DKC_FLAAMLOGS = CHAN_ID_DKC_FLAAMLOGS;
@@ -43,7 +44,6 @@ client.on("ready", () => {
     	/**
 		 * Processing what"s need to
 		 */
-    	var ext = ""
     	glob("./images/today.*", function (er, files) {
     		ext = files[0].split(".").pop()		
     	})
