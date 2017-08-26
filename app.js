@@ -126,9 +126,10 @@ client.on("ready", () => {
 client.on("message", message => {
 
 	if(message.content === "!time") {
-		var time = moment().day(1);
-		time = moment(time).hours(6).minutes(0).seconds(0).milliseconds(0);
-		client.channels.get(CHAN_ID_DKC_FLAAMLOGS).send("-> time : "+time.format());
+		var time = moment().add(1, "days")
+		time = moment(time).hours(6).minutes(0).seconds(0).milliseconds(0)
+		time = time.fromNow()
+		client.channels.get(CHAN_ID_DKC_FLAAMLOGS).send("-> time : "+time.format())
 	}
 	
 	if(message.author.id == FLAAMBOT_KHRID_ID || message.author.id == FLAAMBOT_AERIN_ID) {
