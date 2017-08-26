@@ -39,7 +39,6 @@ client.on('ready', () => {
     	/**
     	 * Processing what's needed to do
     	 */
-    	var action = ""
     	fs.stat('./images/today.jpg', function(err, stat) {
     		if(err == null) {
     			filetime = moment(stat.birthtimeMs).format('YYYYMMDD');
@@ -47,6 +46,7 @@ client.on('ready', () => {
     			//today = moment(today).add(1, "days").format('YYYYMMDD');
     			console.log(filetime + " - " + today)
     			if(filetime < today) {
+    				tools.sendToLogChannel(":smirk_cat: Replacing the picture :smirk_cat:")
     				fs.rename('./images/today.jpg', './images/used/'+filetime+'.jpg', function (err) {
     					if(!err) {
     						fs.readdir('./images/available/', function (err, files) { 
@@ -56,22 +56,22 @@ client.on('ready', () => {
     								fs.rename('./images/available/'+target, './images/today.jpg'), function (success) {
     									fs.stat('./images/today.jpg', function(err, stat) {
     										if(err == null) {
-    											action = "today.jpg updated"
+    											tools.sendToLogChannel(":smirk_cat: today.jpg updated :smirk_cat:")
     										} else {
-    											action = ":scream_cat: Could not create today.jpg :scream_cat:"
+    											tools.sendToLogChannel(":scream_cat: Could not create today.jpg :scream_cat:")
     										}
     									})
     								}
     							} else {
-    								action = ":scream_cat: No more pics :scream_cat:";
+    								tools.sendToLogChannel(":scream_cat: No more pics :scream_cat:");
     							}
     						})
     					} else {
-    						action = ":scream_cat: Could not move old today.jpg to used folder :scream_cat:"
+    						tools.sendToLogChannel(":scream_cat: Could not move old today.jpg to used folder :scream_cat:")
     					}
     				})
     			} else {
-    				action = "No need to change the picture yet"
+    				tools.sendToLogChannel(":smirk_cat: No need to change the picture yet :smirk_cat:")
     			}
     		} else {
     			fs.readdir('./images/available/', function (err, files) { 
@@ -81,19 +81,18 @@ client.on('ready', () => {
     					fs.rename('./images/available/'+target, './images/today.jpg'), function (success) {
     						fs.stat('./images/today.jpg', function(err, stat) {
     							if(err == null) {
-    								action = "today.jpg updated"
+    								tools.sendToLogChannel(":smirk_cat: today.jpg updated :smirk_cat:")
     							} else {
-    								action = ":scream_cat: Could not create today.jpg :scream_cat:"
+    								tools.sendToLogChannel(":scream_cat: Could not create today.jpg :scream_cat:")
     							}
     						})
     					}
     				} else {
-    					action = ":scream_cat: No more pics :scream_cat:";
+    					tools.sendToLogChannel(":scream_cat: No more pics :scream_cat:");
     				}
     			})
     		}
     	});
-    	tools.sendToLogChannel('Actions : ' + action);
     	
         //client.channels.get(CHAN_ID_DKC_GENERAL).send("Testing change");
         client.channels.get(CHAN_ID_DKC_GENERAL).send("Photo de Flaam du jour :heart_eyes_cat:", {
