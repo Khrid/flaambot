@@ -113,8 +113,11 @@ client.on('message', message => {
 				if(message.attachments.first().filename.endsWith(".jpg")) {
 					var newFile = crypto.randomBytes(20).toString('hex')+".jpg"
 					
+					
+					
+					
 					var download = function(url, dest, cb) {
-					  var file = fs.createWriteStream("./images/available/"+newFile);
+					  var file = fs.createWriteStream(dest);
 					  var request = https.get(url, function(response) {
 					    response.pipe(file);
 					    file.on('finish', function() {
@@ -141,6 +144,7 @@ client.on('message', message => {
 					    console.log(err.message);
 					  });
 					};
+					download(message.attachments.first().url, "./images/available/"+newFile, null);
 				} else {
 					message.channel.send("Format d'image pas supporté :smile_cat:");
 				}
