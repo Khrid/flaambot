@@ -91,8 +91,8 @@ client.on('ready', () => {
     				}
     			})
     		}
+        	tools.sendToLogChannel('Action : ' + action);
     	});
-    	tools.sendToLogChannel('Action : ' + action);
     	
         //client.channels.get(CHAN_ID_DKC_GENERAL).send("Testing change");
         client.channels.get(CHAN_ID_DKC_GENERAL).send("Photo de Flaam du jour :heart_eyes_cat:", {
