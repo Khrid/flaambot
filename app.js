@@ -39,8 +39,8 @@ client.on("ready", () => {
 	
 	var rule = new schedule.RecurrenceRule()
     //rule.minute = 30
-    //rule.hour = 6
-    rule.second = 30
+    rule.hour = 6
+    //rule.second = 30
 
     var j = schedule.scheduleJob(rule, function() {
     	
@@ -56,7 +56,7 @@ client.on("ready", () => {
 	    			filetime = moment(stat.birthtimeMs).format("YYYYMMDD");
 	    			today = moment().format("YYYYMMDD");
 	    			// today = moment(today).add(1, "days").format("YYYYMMDD");
-	    			console.log(filetime + " - " + today)
+	    			//console.log(filetime + " - " + today)
 	    			if(filetime < today) {
 	    				action = "Replacing the picture"
 	    				fs.rename("./images/"+files, "./images/used/"+files, function (err) {
@@ -112,7 +112,7 @@ client.on("ready", () => {
 	        	tools.sendToLogChannel("Action : " + action);
 	    	})
 	        // client.channels.get(CHAN_ID_DKC_GENERAL).send("Testing change");
-	        client.channels.get(CHAN_ID_DKC_GENERAL).send("Photo de Flaam du jour :heart_eyes_cat:", {
+	        client.channels.get(CHAN_ID_QGS_FLAAMCHAN).send("Photo de Flaam du jour :heart_eyes_cat:", {
 	            files: [
 	              "./images/"+files
 	            ]
