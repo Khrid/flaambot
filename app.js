@@ -137,7 +137,8 @@ client.on('message', message => {
 			    	            	"./images/available/"+newFile
 			    	            ]
 			    	          });
-			    			      
+
+			    			var tools = require('./tools')  
 			            	tools.sendImageToLogChannel("New pic uploaded", "./images/available/"+newFile);
 			    		}
 			    })
