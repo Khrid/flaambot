@@ -44,10 +44,11 @@ client.on("ready", () => {
     	/**
 		 * Processing what"s need to
 		 */
-    	ext = glob("./images/today.*", function (er, files) {
-    		return files[0].split(".").pop()		
+    	
+    	fs.readdir("./images/", function (err, files) {
+
+        	console.log(files)
     	})
-    	console.log(ext)
     	fs.stat("./images/today."+ext, function(err, stat) {
     		if(err == null) {
     			filetime = moment(stat.birthtimeMs).format("YYYYMMDD");
