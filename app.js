@@ -30,7 +30,7 @@ client.on('ready', () => {
 		if(err == null) {
 			filetime = moment(stat.birthtimeMs).format('YYYYMMDD');
 			today = moment().format('YYYYMMDD');
-			today = moment(today).add(1, "days")
+			today = moment(today).add(1, "days").format('YYYYMMDD');
 			console.log(filetime + " - " + today)
 			if(filetime < today) {
 				tools.sendToLogChannel(":smirk_cat: Replacing the picture :smirk_cat:")
