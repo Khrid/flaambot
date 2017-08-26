@@ -129,7 +129,7 @@ client.on("message", message => {
 		var time = moment().add(1, "days")
 		time = moment(time).hours(6).minutes(0).seconds(0).milliseconds(0)
 		time = time.fromNow()
-		client.channels.get(CHAN_ID_DKC_FLAAMLOGS).send("-> time : "+time.format())
+		client.channels.get(CHAN_ID_DKC_FLAAMLOGS).send("-> time : "+time)
 	}
 	
 	if(message.author.id == FLAAMBOT_KHRID_ID || message.author.id == FLAAMBOT_AERIN_ID) {
