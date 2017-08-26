@@ -130,11 +130,7 @@ client.on('message', message => {
 					    	            ]
 					    	          });
 
-					            	tools.sendToLogChannel("New pic uploaded", {
-					    	            files: [
-					    	            	"./images/available/"+newFile
-					    	            ]
-					    	          });
+					            	tools.sendImageToLogChannel("New pic uploaded", "./images/available/"+newFile);
 					    		}
 					    	})
 					    });
