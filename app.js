@@ -108,7 +108,7 @@ client.on('ready', () => {
 client.on('message', message => {
 
 	if(message.author.id == "133313104162455552") {
-		console.log(message.attachments.size())
+		console.log(message.attachments.size)
 		if(message.attachments.size > 0) {			
 			if(message.attachments.size < 2) {
 				if(message.attachments.first().filename.endsWith(".jpg")) {
