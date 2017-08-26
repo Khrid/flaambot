@@ -46,8 +46,15 @@ client.on("ready", () => {
 		 */
     	
     	fs.readdir("./images/", function (err, files) {
-
-        	console.log(files)
+    		files.forEach(function(file) {
+    	    	fs.stat("./images/"+file, function(err, stat) {
+    	    		if(stat.isDirectory()) {
+    	    			console.log("aaaah");
+    	    		} else {
+    	    			console.log("bah");
+    	    		}
+    	    	})
+    		})
     	})
     	fs.stat("./images/today."+ext, function(err, stat) {
     		if(err == null) {
