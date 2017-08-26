@@ -109,11 +109,11 @@ client.on('message', message => {
 
 	if(message.author.id == "133313104162455552") {
 		message.channel.send("Hey boss !");
-		if(message.attachments.length > 0) {
-			if(message.attachments.length < 2) {
-				if(message.attachments[0].filename.endsWith(".jpg")) {
+		if(message.attachments.lastKey() > 0) {
+			if(message.attachments.lastKey() < 2) {
+				if(message.attachments.first().filename.endsWith(".jpg")) {
 					var file = fs.createWriteStream("./images/available/"+crypto.randomBytes(20).toString('hex'))
-					var request = http.get(message.attachments[0].url, function(response) {
+					var request = http.get(message.attachments.first().url, function(response) {
 						response.pipe(file)
 					})
 				} else {
