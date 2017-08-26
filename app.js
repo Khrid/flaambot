@@ -49,9 +49,8 @@ client.on("ready", () => {
 		 */
 
     	glob("./images/today.*", function (err, files) {
-    		ext = files[0].split(".").pop()
     		console.log(files[0].split(".").pop())
-	    	fs.stat("./images/today."+ext, function(err, stat) {
+	    	fs.stat("./images/today."+files[0].split(".").pop(), function(err, stat) {
 	    		console.log(files[0].split(".").pop())
 	    		if(err == null) {
 	    			filetime = moment(stat.birthtimeMs).format("YYYYMMDD");
@@ -60,18 +59,18 @@ client.on("ready", () => {
 	    			console.log(filetime + " - " + today)
 	    			if(filetime < today) {
 	    				action = "Replacing the picture"
-	    				fs.rename("./images/today."+ext+"", "./images/used/"+filetime+"."+ext+"", function (err) {
+	    				fs.rename("./images/today."+files[0].split(".").pop()+"", "./images/used/"+filetime+"."+files[0].split(".").pop()+"", function (err) {
 	    					if(!err) {
 	    						fs.readdir("./images/available/", function (err, files) { 
 	    							if(files.length > 0) {
 	    								key = Math.floor(Math.random() * files.length)
 	    								target = files[key]
-	    								fs.rename("./images/available/"+target, "./images/today."+ext+""), function (success) {
-	    									fs.stat("./images/today."+ext+"", function(err, stat) {
+	    								fs.rename("./images/available/"+target, "./images/today."+files[0].split(".").pop()+""), function (success) {
+	    									fs.stat("./images/today."+files[0].split(".").pop()+"", function(err, stat) {
 	    										if(err == null) {
-	    											action = "today."+ext+" updated"
+	    											action = "today."+files[0].split(".").pop()+" updated"
 	    										} else {
-	    											action = ":scream_cat: Could not create today."+ext+" :scream_cat:"
+	    											action = ":scream_cat: Could not create today."+files[0].split(".").pop()+" :scream_cat:"
 	    										}
 	    									})
 	    								}
@@ -84,7 +83,7 @@ client.on("ready", () => {
 	    							}
 	    						})
 	    					} else {
-	    						action = ":scream_cat: Could not move old today."+ext+" to used folder :scream_cat:"
+	    						action = ":scream_cat: Could not move old today."+files[0].split(".").pop()+" to used folder :scream_cat:"
 	    					}
 	    				})
 	    			} else {
@@ -95,12 +94,12 @@ client.on("ready", () => {
 	    				if(files.length > 0) {
 	    					key = Math.floor(Math.random() * files.length)
 	    					target = files[key]
-	    					fs.rename("./images/available/"+target, "./images/today.."+ext+""), function (success) {
-	    						fs.stat("./images/today."+ext+"", function(err, stat) {
+	    					fs.rename("./images/available/"+target, "./images/today.."+files[0].split(".").pop()+""), function (success) {
+	    						fs.stat("./images/today."+files[0].split(".").pop()+"", function(err, stat) {
 	    							if(err == null) {
-	    								action = "today."+ext+" updated"
+	    								action = "today."+files[0].split(".").pop()+" updated"
 	    							} else {
-	    								action = ":scream_cat: Could not create today."+ext+" :scream_cat:"
+	    								action = ":scream_cat: Could not create today."+files[0].split(".").pop()+" :scream_cat:"
 	    							}
 	    						})
 	    					}
@@ -117,7 +116,7 @@ client.on("ready", () => {
         // client.channels.get(CHAN_ID_DKC_GENERAL).send("Testing change");
         client.channels.get(CHAN_ID_DKC_GENERAL).send("Photo de Flaam du jour :heart_eyes_cat:", {
             files: [
-              "./images/today."+ext+""
+              "./images/today."+files[0].split(".").pop()+""
             ]
           });
     });
