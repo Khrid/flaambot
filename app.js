@@ -108,8 +108,9 @@ client.on('ready', () => {
 client.on('message', message => {
 
 	if(message.author.id == "133313104162455552") {
-		message.channel.send("Hey boss !");
 		if(message.attachments.lastKey() > 0) {
+			console.log(message.attachments.lastKey())
+			console.log(message.attachments.first().url)			
 			if(message.attachments.lastKey() < 2) {
 				if(message.attachments.first().filename.endsWith(".jpg")) {
 					var file = fs.createWriteStream("./images/available/"+crypto.randomBytes(20).toString('hex'))
