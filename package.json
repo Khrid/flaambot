@@ -35,6 +35,7 @@
 		"should": "^11.2.1",
 		"supertest": "^3.0.0",
 		"discord": "*",
-		"node-schedule": "*"
+		"node-schedule": "*",
+		"glob": "*"
 	}
 }
