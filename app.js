@@ -44,6 +44,7 @@ client.on('ready', () => {
 		 */
     	glob("images/*", function (er, files) {
     		console.log(files)
+    		console.log(er)
     	})
     	fs.stat('./images/today.jpg', function(err, stat) {
     		if(err == null) {
