@@ -34,8 +34,8 @@ client.on('ready', () => {
 			console.log(filetime + " - " + today)
 			if(filetime < today) {
 				tools.sendToLogChannel(":smirk_cat: Replacing the picture :smirk_cat:")
-				fs.rename('./images/today.jpg', './images/used/'+filetime+'.jpg', function (success) {
-					if(success) {
+				fs.rename('./images/today.jpg', './images/used/'+filetime+'.jpg', function (err) {
+					if(!err) {
 						fs.readdir('./images/available/', function (err, files) { 
 							if(files.length > 0) {
 								key = Math.floor(Math.random() * files.length)
