@@ -49,7 +49,7 @@ client.on("ready", () => {
 		 */
 
     	glob("./images/today.*", function (err, files) {
-    		files = files.replace("./images/","");
+    		files = files[0].replace("./images/","");
 	    	fs.stat("./images/"+files, function(err, stat) {
 	    		
 	    		if(err == null) {
