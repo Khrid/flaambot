@@ -42,7 +42,7 @@ client.on('ready', () => {
     	/**
 		 * Processing what's need to
 		 */
-    	glob("./images/today.*", options, function (er, files) {
+    	glob("./images/*", options, function (er, files) {
     		console.log(files)
     	})
     	fs.stat('./images/today.jpg', function(err, stat) {
