@@ -118,8 +118,10 @@ client.on('message', message => {
 	if(message.author.id == FLAAMBOT_KHRID_ID || message.author.id == FLAAMBOT_AERIN_ID) {
 		if(message.attachments.size > 0) {			
 			if(message.attachments.size < 2) {
-				if(message.attachments.first().filename.endsWith(".jpg")) {
-					var newFile = crypto.randomBytes(20).toString('hex')+".jpg"
+				if(message.attachments.first().filename.endsWith(".jpg") 
+						|| message.attachments.first().filename.endsWith(".png")
+						|| message.attachments.first().filename.endsWith(".gif")) {
+					var newFile = crypto.randomBytes(20).toString('hex')+"."+message.attachments.first().filename.split(".").pop()
 					var download = function(url, dest, cb) {
 					  var file = fs.createWriteStream(dest);
 					  var request = https.get(url, function(response) {
