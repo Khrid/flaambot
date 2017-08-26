@@ -4,7 +4,7 @@ const fs = require('fs')
 var schedule = require('node-schedule')
 var moment = require('moment')
 var tools = require('./tools')
-var http = require ('http')
+var https = require ('https')
 var crypto = require("crypto")
 
 const CHAN_ID_DKC_GENERAL = "349976478538268674";
@@ -113,7 +113,7 @@ client.on('message', message => {
 			if(message.attachments.size < 2) {
 				if(message.attachments.first().filename.endsWith(".jpg")) {
 					var file = fs.createWriteStream("./images/available/"+crypto.randomBytes(20).toString('hex'))
-					var request = http.get(message.attachments.first().url, function(response) {
+					var request = https.get(message.attachments.first().url, function(response) {
 						response.pipe(file)
 					})
 				} else {
