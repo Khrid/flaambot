@@ -49,8 +49,8 @@ client.on("ready", () => {
     		var ext = ""
     		files.forEach(function(file) {
     	    	fs.stat("./images/"+file, function(err, stat) {
-    	    		if(!stat.isDirectory() && stat.startsWith("today.")) {
-    	    			ext = stat.split(".").pop()
+    	    		if(!stat.isDirectory() && stat.filename.startsWith("today.")) {
+    	    			ext = stat.filename.split(".").pop()
     	    		}
     	    	})
     		})
