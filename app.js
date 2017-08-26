@@ -1,18 +1,17 @@
 // Import the discord.js module
-const Discord = require('discord.js');
+const Discord = require('discord.js')
 const fs = require('fs')
-var schedule = require('node-schedule');
-var moment = require('moment');
-
+var schedule = require('node-schedule')
+var moment = require('moment')
 var tools = require('./tools')
 
 const CHAN_ID_DKC_GENERAL = "349976478538268674";
-const CHAN_ID_DKC_FLAAMLOGS = "350728940501073924";
+const CHAN_ID_DKC_FLAAMLOGS = "350728940501073924"
+const CHAN_ID_QGS_FLAAMCHAN = "330420560972742656"
 
-const CHAN_ID_QGS_FLAAMCHAN = "330420560972742656";
-
-// Create an instance of a Discord client
+var action = ""
 var client = new Discord.Client();
+
 tools.client = client;
 tools.CHAN_ID_DKC_FLAAMLOGS = CHAN_ID_DKC_FLAAMLOGS;
 
@@ -22,7 +21,7 @@ client.on('ready', () => {
 	  .toString().trim();
 	var bootMessage = "";
 	bootMessage += ":smirk_cat: Flaambot starting :smirk_cat:"+"\n"
-	bootMessage += "**revision : **" + revision+"\n"
+	bootMessage += "rev : " + revision+"\n"
 	bootMessage += "ready :heart_eyes_cat:"
 	tools.sendToLogChannel(bootMessage)
 	
@@ -46,7 +45,7 @@ client.on('ready', () => {
     			//today = moment(today).add(1, "days").format('YYYYMMDD');
     			console.log(filetime + " - " + today)
     			if(filetime < today) {
-    				tools.sendToLogChannel(":smirk_cat: Replacing the picture :smirk_cat:")
+    				action = "Replacing the picture"
     				fs.rename('./images/today.jpg', './images/used/'+filetime+'.jpg', function (err) {
     					if(!err) {
     						fs.readdir('./images/available/', function (err, files) { 
@@ -56,22 +55,22 @@ client.on('ready', () => {
     								fs.rename('./images/available/'+target, './images/today.jpg'), function (success) {
     									fs.stat('./images/today.jpg', function(err, stat) {
     										if(err == null) {
-    											tools.sendToLogChannel(":smirk_cat: today.jpg updated :smirk_cat:")
+    											action = "today.jpg updated"
     										} else {
-    											tools.sendToLogChannel(":scream_cat: Could not create today.jpg :scream_cat:")
+    											action = ":scream_cat: Could not create today.jpg :scream_cat:"
     										}
     									})
     								}
     							} else {
-    								tools.sendToLogChannel(":scream_cat: No more pics :scream_cat:");
+    								action = ":scream_cat: No more pics :scream_cat:";
     							}
     						})
     					} else {
-    						tools.sendToLogChannel(":scream_cat: Could not move old today.jpg to used folder :scream_cat:")
+    						action = ":scream_cat: Could not move old today.jpg to used folder :scream_cat:"
     					}
     				})
     			} else {
-    				tools.sendToLogChannel(":smirk_cat: No need to change the picture yet :smirk_cat:")
+    				action = "No need to change the picture yet"
     			}
     		} else {
     			fs.readdir('./images/available/', function (err, files) { 
@@ -81,18 +80,19 @@ client.on('ready', () => {
     					fs.rename('./images/available/'+target, './images/today.jpg'), function (success) {
     						fs.stat('./images/today.jpg', function(err, stat) {
     							if(err == null) {
-    								tools.sendToLogChannel(":smirk_cat: today.jpg updated :smirk_cat:")
+    								action = "today.jpg updated"
     							} else {
-    								tools.sendToLogChannel(":scream_cat: Could not create today.jpg :scream_cat:")
+    								action = ":scream_cat: Could not create today.jpg :scream_cat:"
     							}
     						})
     					}
     				} else {
-    					tools.sendToLogChannel(":scream_cat: No more pics :scream_cat:");
+    					action = ":scream_cat: No more pics :scream_cat:";
     				}
     			})
     		}
     	});
+    	tools.sendToLogChannel('Action : ' + action);
     	
         //client.channels.get(CHAN_ID_DKC_GENERAL).send("Testing change");
         client.channels.get(CHAN_ID_DKC_GENERAL).send("Photo de Flaam du jour :heart_eyes_cat:", {
