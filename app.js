@@ -118,7 +118,7 @@ client.on('message', message => {
 										
 				    	fs.stat("./images/available/"+newFile, function(err, stat) {
 				    		if(err == null) {
-				    			message.send("Photo ajoutée !", {
+				    			message.channel.send("Photo ajoutée !", {
 				    	            files: [
 				    	            	"./images/available/"+newFile
 				    	            ]
