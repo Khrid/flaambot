@@ -34,6 +34,29 @@ client.on('ready', () => {
 			console.log(filetime + " - " + today)
 			if(filetime < today) {
 				tools.sendToLogChannel(":smirk_cat: Replacing the picture :smirk_cat:")
+				fs.rename('./images/today.jpg', './images/used/'+filetime+'.jpg', function (success) {
+					if(success) {
+						fs.readdir('./images/available/', function (err, files) { 
+							if(files.length > 0) {
+								key = Math.floor(Math.random() * files.length)
+								target = files[key]
+								fs.rename('./images/available/'+target, './images/today.jpg'), function (success) {
+									fs.stat('./images/today.jpg', function(err, stat) {
+										if(err == null) {
+											tools.sendToLogChannel(":smirk_cat: today.jpg updated :smirk_cat:")
+										} else {
+											tools.sendToLogChannel(":scream_cat: Could not create today.jpg :scream_cat:")
+										}
+									})
+								}
+							} else {
+								tools.sendToLogChannel(":scream_cat: No more pics :scream_cat:");
+							}
+						})
+					} else {
+						tools.sendToLogChannel(":scream_cat: Could not move old today.jpg to used folder :scream_cat:")
+					}
+				})
 			} else {
 				tools.sendToLogChannel(":smirk_cat: No need to change the picture yet :smirk_cat:")
 			}
