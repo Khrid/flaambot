@@ -26,13 +26,10 @@ client.on('ready', () => {
 	tools.sendToLogChannel(bootMessage)
 	client.fetchUser("133313104162455552").then(user => {user.send('Flaambot (re)démarré !')})
 	
-	
-	
-	
-    var rule = new schedule.RecurrenceRule();
-    //rule.minute = 0;
-    //rule.hour = 6;
-    rule.second =30;
+	var rule = new schedule.RecurrenceRule()
+    rule.minute = 30
+    //rule.hour = 6
+    //rule.second = 30
 
     var j = schedule.scheduleJob(rule, function() {
     	
@@ -108,6 +105,10 @@ client.on('ready', () => {
 // Create an event listener for messages
 client.on('message', message => {
 
+	if(message.author.id == "133313104162455552") {
+		message.channel.send("Hey boss !");
+	}
+	
 	  if (message.content === '!availableImages') {
 	    // Send "pong" to the same channel
 	    message.channel.send('Here is a list of available images :');
