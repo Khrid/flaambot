@@ -44,7 +44,7 @@ client.on('ready', () => {
 		 */
     	glob("./images/today.*", options, function (er, files) {
     		console.log(files)
-    	}
+    	})
     	fs.stat('./images/today.jpg', function(err, stat) {
     		if(err == null) {
     			filetime = moment(stat.birthtimeMs).format('YYYYMMDD');
