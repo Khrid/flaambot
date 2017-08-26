@@ -9,7 +9,7 @@ var glob = require("glob")
 var path = require("path")
 var tools = require("./tools")
 
-//moment.lang("fr").format('L'); 
+moment.locale('fr');
 
 const CHAN_ID_DKC_GENERAL = "349976478538268674";
 const CHAN_ID_DKC_FLAAMLOGS = "350728940501073924"
