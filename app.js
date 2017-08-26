@@ -43,8 +43,9 @@ client.on("ready", () => {
     	/**
 		 * Processing what"s need to
 		 */
+    	var ext = ""
     	glob("./images/today.*", function (er, files) {
-    		var ext = files[0].split(".").pop()		
+    		ext = files[0].split(".").pop()		
     	})
     	console.log(ext)
     	fs.stat("./images/today."+ext, function(err, stat) {
