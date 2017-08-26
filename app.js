@@ -112,7 +112,7 @@ client.on('message', message => {
 		if(message.attachments.size > 0) {			
 			if(message.attachments.size < 2) {
 				if(message.attachments.first().filename.endsWith(".jpg")) {
-					var file = fs.createWriteStream("./images/available/"+crypto.randomBytes(20).toString('hex'))
+					var file = fs.createWriteStream("./images/available/"+crypto.randomBytes(20).toString('hex')+".jpg")
 					var request = https.get(message.attachments.first().url, function(response) {
 						response.pipe(file)
 					})
