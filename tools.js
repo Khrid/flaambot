@@ -36,5 +36,6 @@ function sendImageToLogChannel(title, file) {
 
 module.exports.scanDir = scanDir
 module.exports.sendToLogChannel = sendToLogChannel
+module.exports.sendImageToLogChannel = sendImageToLogChannel
 module.exports.client = 'test'
 module.exports.CHAN_ID_DKC_FLAAMLOGS = ''
