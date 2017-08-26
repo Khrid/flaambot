@@ -64,9 +64,12 @@ client.on('ready', () => {
     										}
     									})
     								}
+    								if(files.length < 2) {
+        		    					client.fetchUser(FLAAMBOT_KHRID_ID).then(user => {user.send("Il ne rest plus beaucoup de photos de Flaam :crying_cat_face:")})
+    								}
     							} else {
     								action = ":scream_cat: No more pics :scream_cat:";
-    		    					client.fetchUser("133313104162455552").then(user => {user.send(action)})
+    		    					client.fetchUser(FLAAMBOT_KHRID_ID).then(user => {user.send(action)})
     							}
     						})
     					} else {
@@ -92,7 +95,7 @@ client.on('ready', () => {
     					}
     				} else {
     					action = ":scream_cat: No more pics :scream_cat:";
-    					client.fetchUser("133313104162455552").then(user => {user.send(action)})
+    					client.fetchUser(FLAAMBOT_KHRID_ID).then(user => {user.send(action)})
     				}
     			})
     		}
