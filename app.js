@@ -39,7 +39,7 @@ client.on('ready', () => {
     	/**
     	 * Processing what's needed to do
     	 */
-    	action = ""
+    	var action = ""
     	fs.stat('./images/today.jpg', function(err, stat) {
     		if(err == null) {
     			filetime = moment(stat.birthtimeMs).format('YYYYMMDD');
