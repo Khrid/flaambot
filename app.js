@@ -32,6 +32,9 @@ client.on('ready', () => {
 	tools.sendToLogChannel(bootMessage)
 	client.fetchUser(FLAAMBOT_KHRID_ID).then(user => {user.send('Flaambot (re)démarré !')})
 	
+	glob("./images/today.*", options, function (er, files) {
+		console.log(files)
+	})
 	var rule = new schedule.RecurrenceRule()
     //rule.minute = 30
     rule.hour = 6
@@ -42,10 +45,6 @@ client.on('ready', () => {
     	/**
 		 * Processing what's need to
 		 */
-    	glob("images/*", function (er, files) {
-    		console.log(files)
-    		console.log(er)
-    	})
     	fs.stat('./images/today.jpg', function(err, stat) {
     		if(err == null) {
     			filetime = moment(stat.birthtimeMs).format('YYYYMMDD');
