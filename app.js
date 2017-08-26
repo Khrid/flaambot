@@ -29,7 +29,8 @@ client.on('ready', () => {
 	fs.stat('./images/today.jpg', function(err, stat) {
 		if(err == null) {
 			filetime = moment(stat.birthtimeMs).format('YYYYMMDD');
-			today = moment().format('YYYYMMDD').add(1, "days"); 
+			today = moment().format('YYYYMMDD');
+			today.add(1, "days")
 			console.log(filetime + " - " + today)
 			if(filetime < today) {
 				tools.sendToLogChannel(":smirk_cat: Replacing the picture :smirk_cat:")
