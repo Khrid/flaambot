@@ -46,15 +46,15 @@ client.on("ready", () => {
 		 */
     	
     	fs.readdir("./images/", function (err, files) {
+    		var ext = ""
     		files.forEach(function(file) {
     	    	fs.stat("./images/"+file, function(err, stat) {
-    	    		if(stat.isDirectory()) {
-    	    			console.log("aaaah");
-    	    		} else {
-    	    			console.log("bah");
+    	    		if(!stat.isDirectory() && stat.startsWith("today.")) {
+    	    			ext = stat.split(".").pop()
     	    		}
     	    	})
     		})
+    		console.log(ext)
     	})
     	fs.stat("./images/today."+ext, function(err, stat) {
     		if(err == null) {
