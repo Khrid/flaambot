@@ -1,32 +1,40 @@
 {
-  "name": "flaambot",
-  "version": "1.0.0",
-  "description": "Node.js discord bot",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/Khrid/flaambot.git"
-  },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/Khrid/flaambot/issues"
-  },
-  "homepage": "https://github.com/Khrid/flaambot#readme",
-  "dependencies": {
-    "express": "^4.15.4",
-    "moment": "^2.18.1"
-  },
-  "devDependencies": {
-    "mocha": "^3.5.0",
-    "should": "^11.2.1",
-    "supertest": "^3.0.0",
-    "discord": "*",
-    "node-schedule": "*",
-    "moment": "^2.0.0"
-  }
+	"name": "flaambot",
+	"version": "1.0.0",
+	"description": "Node.js discord bot",
+	"main": "index.js",
+	"scripts": 
+	{
+		"test": "echo \"Error: no test specified\" && exit 1"
+	},
+
+	"repository": 
+	{
+		"type": "git",
+		"url": "git+https://github.com/Khrid/flaambot.git"
+	},
+
+	"keywords": 
+	[
+		
+	],
+
+	"author": "",
+	"license": "ISC",
+	"bugs": 
+	{
+		"url": "https://github.com/Khrid/flaambot/issues"
+	},
+
+	"homepage": "https://github.com/Khrid/flaambot#readme",
+	"dependencies": 
+	{
+		"express": "^4.15.4",
+		"moment": "2.18.x",
+		"mocha": "^3.5.0",
+		"should": "^11.2.1",
+		"supertest": "^3.0.0",
+		"discord": "*",
+		"node-schedule": "*"
+	}
 }
