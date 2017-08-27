@@ -14,6 +14,7 @@ moment.locale('fr');
 const CHAN_ID_DKC_GENERAL = "349976478538268674";
 const CHAN_ID_DKC_FLAAMLOGS = "350728940501073924"
 const CHAN_ID_QGS_FLAAMCHAN = "330420560972742656"
+const CHAN_ID_FLAAM_KHRID = "349992542449958912"
 	
 var FLAAMBOT_KHRID_ID = process.env.FLAAMBOT_KHRID_ID
 var FLAAMBOT_AERIN_ID = process.env.FLAAMBOT_AERIN_ID
@@ -67,8 +68,9 @@ client.on("ready", () => {
 	    							if(files.length > 0) {
 	    								key = Math.floor(Math.random() * files.length)
 	    								target = files[key]
-	    								fs.rename("./images/available/"+target, "./images/"+target), function (success) {
-	    									fs.stat("./images/"+target, function(err, stat) {
+	    								ext = target.split(".").pop()
+	    								fs.rename("./images/available/"+target, "./images/today."+ext), function (success) {
+	    									fs.stat("./images/today."+ext, function(err, stat) {
 	    										if(err == null) {
 	    											action = "today's pic updated"
 	    										} else {
@@ -96,8 +98,9 @@ client.on("ready", () => {
 	    				if(files.length > 0) {
 	    					key = Math.floor(Math.random() * files.length)
 	    					target = files[key]
-	    					fs.rename("./images/available/"+target, "./images/"+target), function (success) {
-	    						fs.stat("./images/"+target, function(err, stat) {
+							ext = target.split(".").pop()
+							fs.rename("./images/available/"+target, "./images/today."+ext), function (success) {
+	    						fs.stat("./images/today."+ext, function(err, stat) {
 	    							if(err == null) {
 	    								action = "today's pic updated"
 	    							} else {
@@ -134,7 +137,7 @@ client.on("message", message => {
 		client.channels.get(CHAN_ID_QGS_FLAAMCHAN).send("La prochaine photo de Flaam sera envoyée "+time+" :kissing_cat:")
 	}
 	
-	if(message.author.id == FLAAMBOT_KHRID_ID || message.author.id == FLAAMBOT_AERIN_ID) {
+	if((message.author.id == FLAAMBOT_KHRID_ID || message.author.id == FLAAMBOT_AERIN_ID) && message.channel.id == CHAN_ID_FLAAM_KHRID) {
 		if(message.attachments.size > 0) {			
 			if(message.attachments.size < 2) {
 				if(message.attachments.first().filename.endsWith(".jpg") 
