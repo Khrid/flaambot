@@ -140,7 +140,7 @@ client.on("message", message => {
 		client.channels.get(CHAN_ID_QGS_FLAAMCHAN).send("La prochaine photo de Flaam sera envoyée "+time+" :kissing_cat:")
 	}
 	
-	if((message.author.id == FLAAMBOT_KHRID_ID || message.author.id == FLAAMBOT_AERIN_ID) && message.channel.id == CHAN_ID_QGS_FLAAMCHAN) {
+	if(/*(message.author.id == FLAAMBOT_KHRID_ID || message.author.id == FLAAMBOT_AERIN_ID) && */message.channel.id == CHAN_ID_QGS_FLAAMCHAN) {
 		if(message.content == "!today") {
 			glob("./images/today.*", function (err, files) {
 	    		files = files[0].replace("./images/","");
