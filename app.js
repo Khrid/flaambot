@@ -41,9 +41,9 @@ client.on("ready", () => {
     		
 	
 	var rule = new schedule.RecurrenceRule()
-    //rule.minute = 30
+    // rule.minute = 30
     rule.hour = 6
-    //rule.second = 30
+    // rule.second = 30
 
     var j = schedule.scheduleJob(rule, function() {
     	
@@ -59,7 +59,7 @@ client.on("ready", () => {
 	    			filetime = moment(stat.birthtimeMs).format("YYYYMMDD");
 	    			today = moment().format("YYYYMMDD");
 	    			// today = moment(today).add(1, "days").format("YYYYMMDD");
-	    			//console.log(filetime + " - " + today)
+	    			// console.log(filetime + " - " + today)
 	    			if(filetime < today) {
 	    				action = "Replacing the picture"
 	    				fs.rename("./images/"+files, "./images/used/"+files, function (err) {
@@ -130,11 +130,21 @@ client.on("ready", () => {
 // Create an event listener for messages
 client.on("message", message => {
 
-	if(message.content === "!time" && message.channel.id == CHAN_ID_QGS_FLAAMCHAN) {
+	if(message.content == "!time" && message.channel.id == CHAN_ID_QGS_FLAAMCHAN) {
 		var time = moment().add(1, "days")
 		time = moment(time).hours(6).minutes(0).seconds(0).milliseconds(0)
 		time = time.fromNow()
 		client.channels.get(CHAN_ID_QGS_FLAAMCHAN).send("La prochaine photo de Flaam sera envoyée "+time+" :kissing_cat:")
+	}
+	
+	if((message.author.id == FLAAMBOT_KHRID_ID || message.author.id == FLAAMBOT_AERIN_ID) && message.channel.id == CHAN_ID_QGS_FLAAMCHAN) {
+		if(message.content == "!today") {
+			client.channels.get(CHAN_ID_QGS_FLAAMCHAN).send("Photo de Flaam du jour :heart_eyes_cat:", {
+	            files: [
+	              "./images/"+files
+	            ]
+	          });	
+		}
 	}
 	
 	if((message.author.id == FLAAMBOT_KHRID_ID || message.author.id == FLAAMBOT_AERIN_ID) && message.channel.id == CHAN_ID_FLAAM_KHRID) {
@@ -149,7 +159,8 @@ client.on("message", message => {
 					  var request = https.get(url, function(response) {
 					    response.pipe(file);
 					    file.on("finish", function() {
-					      file.close(cb);  // close() is async, call cb after close completes.
+					      file.close(cb);  // close() is async, call cb after
+											// close completes.
 					      fs.stat("./images/available/"+newFile, function(err, stat) {
 					    		if(err == null) {
 					    			message.channel.send("Photo ajoutée !", {
@@ -163,7 +174,8 @@ client.on("message", message => {
 					    })
 					    });
 					  }).on("error", function(err) { // Handle errors
-					    fs.unlink(dest); // Delete the file async. (But we don"t check the result)
+					    fs.unlink(dest); // Delete the file async. (But we
+											// don"t check the result)
 					    if (cb) cb(err.message);
 					    console.log(err.message);
 					  });
