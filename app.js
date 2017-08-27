@@ -116,12 +116,15 @@ client.on("ready", () => {
 	    		}
 	        	tools.sendToLogChannel("Action : " + action);
 	    	})
+	    	glob("./images/today.*", function (err, files) {
+    		files = files[0].replace("./images/","");
 	        // client.channels.get(CHAN_ID_DKC_GENERAL).send("Testing change");
 	        client.channels.get(CHAN_ID_QGS_FLAAMCHAN).send("Photo de Flaam du jour :heart_eyes_cat:", {
 	            files: [
 	              "./images/"+files
 	            ]
 	          });
+	    	});
     	})
     });
 });
@@ -139,11 +142,15 @@ client.on("message", message => {
 	
 	if((message.author.id == FLAAMBOT_KHRID_ID || message.author.id == FLAAMBOT_AERIN_ID) && message.channel.id == CHAN_ID_QGS_FLAAMCHAN) {
 		if(message.content == "!today") {
-			client.channels.get(CHAN_ID_QGS_FLAAMCHAN).send("Photo de Flaam du jour :heart_eyes_cat:", {
-	            files: [
-	              "./images/"+files
-	            ]
-	          });	
+			glob("./images/today.*", function (err, files) {
+	    		files = files[0].replace("./images/","");
+		        // client.channels.get(CHAN_ID_DKC_GENERAL).send("Testing change");
+		        client.channels.get(CHAN_ID_QGS_FLAAMCHAN).send("Photo de Flaam du jour :heart_eyes_cat:", {
+		            files: [
+		              "./images/"+files
+		            ]
+		          });
+		    	});	
 		}
 	}
 	
