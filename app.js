@@ -150,9 +150,11 @@ client.on("message", message => {
 		}
 	}
 	// testing 2
-	tools.sendToLogChannel("Message coming from " + message.channel.id);
-	tools.sendToLogChannel("Message info" + message);
-	if((message.author.id == FLAAMBOT_KHRID_ID || message.author.id == FLAAMBOT_AERIN_ID) && message.channel.id == CHAN_ID_FLAAM_KHRID) {
+	if((message.author.id == FLAAMBOT_KHRID_ID || message.author.id == FLAAMBOT_AERIN_ID) /*&& message.channel.id == CHAN_ID_FLAAM_KHRID*/) {
+
+		tools.sendToLogChannel("Message coming from " + message.channel.id);
+		tools.sendToLogChannel("Message info" + message);
+		
 		if(message.attachments.size > 0) {			
 			if(message.attachments.size < 2) {
 				if(message.attachments.first().filename.endsWith(".jpg") 
