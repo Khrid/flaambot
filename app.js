@@ -14,7 +14,7 @@ moment.locale('fr');
 const CHAN_ID_DKC_GENERAL = "349976478538268674";
 const CHAN_ID_DKC_FLAAMLOGS = "350728940501073924"
 const CHAN_ID_QGS_FLAAMCHAN = "330420560972742656"
-const CHAN_ID_FLAAM_KHRID = "349992542449958912"
+const CHAN_ID_FLAAM_KHRID = "351057215349850113"							
 	
 var FLAAMBOT_KHRID_ID = process.env.FLAAMBOT_KHRID_ID
 var FLAAMBOT_AERIN_ID = process.env.FLAAMBOT_AERIN_ID
@@ -150,11 +150,7 @@ client.on("message", message => {
 		}
 	}
 	// testing 2
-	if((message.author.id == FLAAMBOT_KHRID_ID || message.author.id == FLAAMBOT_AERIN_ID) /*&& message.channel.id == CHAN_ID_FLAAM_KHRID*/) {
-
-		tools.sendToLogChannel("Message coming from " + message.channel.id);
-		tools.sendToLogChannel("Message info" + message);
-		
+	if((message.author.id == FLAAMBOT_KHRID_ID || message.author.id == FLAAMBOT_AERIN_ID) && message.channel.id == CHAN_ID_FLAAM_KHRID) {
 		if(message.attachments.size > 0) {			
 			if(message.attachments.size < 2) {
 				if(message.attachments.first().filename.endsWith(".jpg") 
