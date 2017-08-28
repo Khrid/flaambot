@@ -152,8 +152,7 @@ client.on("message", message => {
 	
 	if(message.channel.id == CHAN_ID_FLAAM_KHRID) {
 		if(message.content == "!count") {
-			glob("./images/available/*.*", function (err, files) {
-	    		files = files[0].replace("./images/","");
+			fs.readdir("./images/available/", function (err, files) { 
 	    		if(files.length > 1) { 
 	    			s = "s"
 	    		} else {
