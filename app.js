@@ -149,7 +149,7 @@ client.on("message", message => {
 		    	});	
 		}
 	}
-
+	// testing
 	tools.sendToLogChannel("Message coming from " + message.channel.id);
 	tools.sendToLogChannel("Message info" + message);
 	if((message.author.id == FLAAMBOT_KHRID_ID || message.author.id == FLAAMBOT_AERIN_ID) && message.channel.id == CHAN_ID_FLAAM_KHRID) {
