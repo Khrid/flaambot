@@ -37,20 +37,16 @@ client.on("ready", () => {
 	tools.sendToLogChannel(bootMessage)
 	client.fetchUser(FLAAMBOT_KHRID_ID).then(user => {user.send("Flaambot (re)démarré !")})
 	
-	
-    		
-	
 	var rule = new schedule.RecurrenceRule()
-    // rule.minute = 30
-    rule.hour = 6
-    // rule.second = 30
+    	rule.hour = 6
+    	rule.minute = 0
+    	rule.second = 0
 
-    var j = schedule.scheduleJob(rule, function() {
+    	var j = schedule.scheduleJob(rule, function() {
     	
-    	/**
-		 * Processing what"s need to
-		 */
-
+	/**
+	 * Processing what"s need to
+	 */
     	glob("./images/today.*", function (err, files) {
     		files = files[0].replace("./images/","");
 	    	fs.stat("./images/"+files, function(err, stat) {
