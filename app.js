@@ -150,7 +150,7 @@ client.on("message", message => {
 		}
 	}
 	
-	if(message.channel.id == CHAN_ID_FLAAM_KHRID) {
+	if(message.channel.id == CHAN_ID_QGS_FLAAMCHAN) {
 		if(message.content == "!count") {
 			fs.readdir("./images/available/", function (err, files) { 
 	    		if(files.length > 1) { 
@@ -158,7 +158,7 @@ client.on("message", message => {
 	    		} else {
 	    			s = ""
 	    		}
-		        client.channels.get(CHAN_ID_DKC_FLAAMLOGS).send("Il y a "+files.length+" photo"+s+" de Flaam en stock");
+		        client.channels.get(CHAN_ID_QGS_FLAAMCHAN).send("Il y a "+files.length+" photo"+s+" de Flaam en stock");
 		    });	
 		}
 	}
