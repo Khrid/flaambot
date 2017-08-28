@@ -149,6 +149,21 @@ client.on("message", message => {
 		    	});	
 		}
 	}
+	
+	if(message.channel.id == CHAN_ID_FLAAM_KHRID) {
+		if(message.content == "!count") {
+			glob("./images/available/*.*", function (err, files) {
+	    		files = files[0].replace("./images/","");
+	    		if(files.size > 1) { 
+	    			s = "s"
+	    		} else {
+	    			s = ""
+	    		}
+		        client.channels.get(CHAN_ID_DKC_FLAAMLOGS).send("Il y a "+files.size+" photo"+s+" de Flaam en stock");
+		    });	
+		}
+	}
+	
 	// testing 2
 	if((message.author.id == FLAAMBOT_KHRID_ID || message.author.id == FLAAMBOT_AERIN_ID) && message.channel.id == CHAN_ID_FLAAM_KHRID) {
 		if(message.attachments.size > 0) {			
