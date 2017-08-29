@@ -38,11 +38,11 @@ client.on("ready", () => {
 	client.fetchUser(FLAAMBOT_KHRID_ID).then(user => {user.send("Flaambot (re)démarré !")})
 	
 	var rule = new schedule.RecurrenceRule()
-    	rule.hour = 6
-    	rule.minute = 0
-    	rule.second = 0
+	rule.hour = 5
+	rule.minute = 30
+	rule.second = 0
 
-    	var j = schedule.scheduleJob(rule, function() {
+	var j = schedule.scheduleJob(rule, function() {
     	
 	/**
 	 * Processing what"s need to
@@ -112,17 +112,27 @@ client.on("ready", () => {
 	    		}
 	        	tools.sendToLogChannel("Action : " + action);
 	    	})
-	    	glob("./images/today.*", function (err, files) {
-    		files = files[0].replace("./images/","");
-	        // client.channels.get(CHAN_ID_DKC_GENERAL).send("Testing change");
-	        client.channels.get(CHAN_ID_QGS_FLAAMCHAN).send("Photo de Flaam du jour :heart_eyes_cat:", {
-	            files: [
-	              "./images/"+files
-	            ]
-	          });
-	    	});
     	})
     });
+	
+	
+	var rule = new schedule.RecurrenceRule()
+	rule.hour = 6
+	rule.minute = 0
+	rule.second = 0
+
+	var j = schedule.scheduleJob(rule, function() {
+
+		glob("./images/today.*", function (err, files) {
+		files = files[0].replace("./images/","");
+	    // client.channels.get(CHAN_ID_DKC_GENERAL).send("Testing change");
+	    client.channels.get(CHAN_ID_QGS_FLAAMCHAN).send("Photo de Flaam du jour :heart_eyes_cat:", {
+	        files: [
+	          "./images/"+files
+	        ]
+	      });
+		});
+	});
 });
 
 
@@ -136,11 +146,15 @@ client.on("message", message => {
 		client.channels.get(CHAN_ID_QGS_FLAAMCHAN).send("La prochaine photo de Flaam sera envoyée "+time+" :kissing_cat:")
 	}
 	
-	if(/*(message.author.id == FLAAMBOT_KHRID_ID || message.author.id == FLAAMBOT_AERIN_ID) && */message.channel.id == CHAN_ID_QGS_FLAAMCHAN) {
+	if(/*
+		 * (message.author.id == FLAAMBOT_KHRID_ID || message.author.id ==
+		 * FLAAMBOT_AERIN_ID) &&
+		 */message.channel.id == CHAN_ID_QGS_FLAAMCHAN) {
 		if(message.content == "!today") {
 			glob("./images/today.*", function (err, files) {
 	    		files = files[0].replace("./images/","");
-		        // client.channels.get(CHAN_ID_DKC_GENERAL).send("Testing change");
+		        // client.channels.get(CHAN_ID_DKC_GENERAL).send("Testing
+				// change");
 		        client.channels.get(CHAN_ID_QGS_FLAAMCHAN).send("Photo de Flaam du jour :heart_eyes_cat:", {
 		            files: [
 		              "./images/"+files
